@@ -8,7 +8,7 @@ require_once('interface.php');
  * @usuario string
  * @senha_usuario string
  * @banco string
- * @conn object
+ * @conexao object
  * @arquivo object
  * @mensagem string
  */
@@ -28,7 +28,7 @@ $banco = "ggtest";
 // método de tentativa de conexão ao servidor do banco de dados
 try {
     // variável estática global de conexão
-    $conn = @mysqli_connect(
+    $conexao = @mysqli_connect(
         $servidor,
         $usuario,
         $senha_usuario,
@@ -36,7 +36,7 @@ try {
     );
 } catch (\Exception $e) {
     // nome do arquivo
-    $arquivo_nome = "db conn error $ano $mes $dia $hora $minuto $segundo $milesimo.txt";
+    $arquivo_nome = "falha conexao mysql $ano $mes $dia $hora $minuto $segundo $milesimo.txt";
 
     // diretório destino
     $diretorio_nome = './logs/';
