@@ -35,7 +35,7 @@ function adicionarOrcamento(obj) {
     let txt_quantidade = document.getElementById('txt_quantidade' + id_item);
     let sel_orcamentos = document.getElementById('sel_orcamentos');
 
-    let frm_temp = document.getElementById('frm_temp');
+    let frm_add_item = document.getElementById('frm_add_item');
     let hdn_id_orcamento = document.getElementById('hdn_id_orcamento');
     let hdn_id_usuario = document.getElementById('hdn_id_usuario');
     let hdn_id_item = document.getElementById('hdn_id_item');
@@ -52,7 +52,7 @@ function adicionarOrcamento(obj) {
     hdn_id_item.value = id_item;
     hdn_quantidade.value = txt_quantidade.value;
 
-    $('#frm_temp').trigger("submit");
+    $('#frm_add_item').trigger("submit");
 }
 
 function diminuirQuantidade(obj) {
@@ -74,7 +74,7 @@ function aumentarQuantidade(obj) {
 }
 
 $(document).ready(function() {
-    $('#frm_temp').submit(function(e) {
+    $('#frm_add_item').submit(function(e) {
         let hdn_id_item = document.getElementById('hdn_id_item');
         let div_sucesso = document.getElementById('div_sucesso' + hdn_id_item.value);
         e.preventDefault();
