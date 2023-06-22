@@ -5,6 +5,8 @@ require_once('conexao.php');
 if (!@$_SESSION['logado']) {
     header('Location: login.php?msg=' . htmlspecialchars("Para entrar no sistema é necessário estar cadastrado e logado."));
 }
+
+$id_usuario = $_SESSION['id_usuario'];
 ?>
 
 <!DOCTYPE html>
@@ -28,24 +30,48 @@ if (!@$_SESSION['logado']) {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav nav-underline navbar-nav me-auto mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:verItens()">Itens</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Itens
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="javascript:verItens()">Adicionar Itens a um orçamento</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Novo Item</a></li>
+                            <li><a class="dropdown-item" href="#">Editar Item</a></li>
+                            <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
+                            <li><a class="dropdown-item" href="#">Excluir Item</a></li>
+                            <?php } ?>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:verNovoOrcamento()">Novo Orçamento</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Orçamentos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="javascript:verNovoOrcamento()">Novo Orçamento</a></li>
+                            <li><a class="dropdown-item" href="javascript:verOrcamentos()">Editar Orçamento</a></li>
+                            <li><a class="dropdown-item" href="#">Excluir Orçamento</a></li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:verOrcamentos()">Orçamentos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./sair.php">Sair</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Clientes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Novo Cliente</a></li>
+                            <li><a class="dropdown-item" href="#">Editar Cliente</a></li>
+                            <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
+                            <li><a class="dropdown-item" href="#">Excluir Cliente</a></li>
+                            <?php } ?>
+                        </ul>
                     </li>
                 </ul>
                 <div class="d-flex" role="search">
                     <select id="sel_orcamentos" class="form-select">
                         <option value="0" selected>Selecione aqui um orçamento</option>
                         <?php
-                            $str_sql_orcamentos = "select * from `tbl_orcamentos`;";
+                            $str_sql_orcamentos = "select * from `tbl_orcamentos` where `id_usuario` = $id_usuario;";
                             $sql_orcamentos = mysqli_query($conexao, $str_sql_orcamentos);
                             $qtd_orcamentos = mysqli_num_rows($sql_orcamentos);
                             for ($o = 0; $o < $qtd_orcamentos; $o++) {
@@ -66,6 +92,23 @@ if (!@$_SESSION['logado']) {
                         ?>
                     </select>
                 </div>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-gear"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
+                            <li><a class="dropdown-item" href="#">Novo Usuário</a></li>
+                            <li><a class="dropdown-item" href="#">Editar Usuário</a></li>
+                            <li><a class="dropdown-item" href="#">Excluir Cliente</a></li>
+                            <?php } ?>
+                            <li><a class="dropdown-item" href="#">Meu cadastro</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="./sair.php"><i class="fa fa-remove text-danger"></i> Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -73,7 +116,7 @@ if (!@$_SESSION['logado']) {
     <header class="content">
         <div class="container collapse show" id="sec_cabecalho">
             <div class="row">
-                <div class="col-md-4 mb-3 mt-3">
+                <div class="col-md-4 mb-3 mt-4">
                     &nbsp;
                 </div>
             </div>
@@ -81,15 +124,12 @@ if (!@$_SESSION['logado']) {
     </header>
 
     <section class="content">
-        <div class="container collapse show" id="sec_itens">
-            <div class="row">
-                <div class="col-md-4 mb-3 mt-3">
-                    &nbsp;
-                </div>
-            </div>
+        <div class="container-fluid collapse show" id="sec_itens">
             <?php if (isset($_GET['msg'])) { ?>
             <div class="row">
-                <h1 class="h1"><?php echo $_GET['msg']; ?></h1>
+                <div class="col-md-4 mb-3">
+                    <h5 class="h5 text-center"><i class="fa fa-bullhorn text-danger"></i> <<< <i><?php echo $_GET['msg']; ?></i></h5>
+                </div>
             </div>
             <?php } ?>
             <div class="row">
@@ -159,8 +199,8 @@ if (!@$_SESSION['logado']) {
                             </div>
                             <?php } ?>
                             <?php if (@$_SESSION['tipo_usuario'] == 1) { ?>
-                            <button onclick="adicionarOrcamento(this)" class="btn btn-primary mx-auto d-block" data-user="<?php echo $_SESSION['id_usuario']; ?>" data-item="<?php echo $id_item; ?>">Adicionar ao orçamento</button>
-                            <div class="container collapse border-0 mt-3 text-center text-success" id="div_sucesso<?php echo $id_item; ?>">.</div>
+                            <button onclick="adicionarOrcamento(this)" class="btn btn-primary mx-auto d-block" data-user="<?php echo $_SESSION['id_usuario']; ?>" data-item="<?php echo $id_item; ?>">Adicionar</button>
+                            <div class="container collapse border-0 mt-3 text-center" id="div_sucesso<?php echo $id_item; ?>">.</div>
                             <?php } ?>
                         </div>
                     </div>
@@ -172,28 +212,49 @@ if (!@$_SESSION['logado']) {
         </div>
     </section>
 
-    <section class="content">
+    <section class="content mt-4">
         <div class="container collapse" id="sec_novo_orcamento">
-            Seção Novo Orçamento
+            <form action="adicionar_orcamento.php" method="post" id="frm_novo_orcamento" name="frm_novo_orcamento">
+                <div class="input-group mb-3">
+                    <select class="form-select" name="sel_clientes" id="sel_clientes">
+                        <option value="0" selected>Selecione um cliente</option>
+                        <?php
+                            $str_sql_clientes = "select * from `tbl_clientes`;";
+                            $sql_clientes = mysqli_query($conexao, $str_sql_clientes);
+                            $qtd_clientes = mysqli_num_rows($sql_clientes);
+
+                            for ($c = 0; $c < $qtd_clientes; $c++) {
+                                $clientes = mysqli_fetch_array($sql_clientes);
+                                $id_cliente = $clientes['id'];
+                                $nome_cliente = $clientes['nome'];
+                        ?>
+                        <option value="<?php echo $id_cliente; ?>"><?php echo $nome_cliente; ?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                    <input type="submit" class="btn btn-outline-success" value="Criar Orçamento">
+                </div>
+            </form>
+            <div class="container collapse" id="div_sucesso_novo_orcamento">.</div>
         </div>
     </section>
 
-    <section class="content">
+    <section class="content mt-4">
         <div class="container collapse" id="sec_orcamentos">
             Seção Orçamentos
         </div>
     </section>
 
-    <form method="post" id="frm_temp" name="frm_temp">
+    <form method="post" id="frm_add_item" name="frm_add_item">
         <input type="hidden" name="hdn_id_orcamento" id="hdn_id_orcamento" />
         <input type="hidden" name="hdn_id_usuario" id="hdn_id_usuario" />
         <input type="hidden" name="hdn_id_item" id="hdn_id_item" />
         <input type="hidden" name="hdn_quantidade" id="hdn_quantidade" />
-        <input type="submit" value="enviar" style="display: none;" />
     </form>
 
     <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <!-- <script src="./node_modules/@popperjs/core/dist/umd/popper-lite.min.js"></script> -->
+    <script src="./node_modules/@popperjs/core/dist/umd/popper-lite.min.js"></script>
     <script type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./funcoes.js"></script>
 </body>
