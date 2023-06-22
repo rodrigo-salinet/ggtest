@@ -12,10 +12,12 @@ $qtd_verificar_usuario = mysqli_num_rows($sql_verificar_usuario);
 if ($qtd_verificar_usuario == 1) {
     for ($i = 0; $i < $qtd_verificar_usuario; $i++) {
         $verificar_usuario = mysqli_fetch_array($sql_verificar_usuario);
-        $tipo_usuario = $verificar_usuario['tipo_usuario'];
+        $tipo_usuario = $verificar_usuario['id_tipo'];
+        $id_usuario = $verificar_usuario['id'];
     }
     $_SESSION['logado'] = true;
     $_SESSION['tipo_usuario'] = $tipo_usuario;
+    $_SESSION['id_usuario'] = $id_usuario;
     return header('Location: index.php?msg=' . htmlspecialchars("Login realizado com sucesso."));
 }
 
