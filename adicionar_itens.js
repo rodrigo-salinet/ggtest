@@ -1,3 +1,33 @@
+function adicionarOrcamento(obj) {
+    let id_usuario = obj.dataset.user;
+    let id_item = obj.dataset.item;
+    let txt_quantidade = document.getElementById('txt_quantidade' + id_item);
+    let sel_orcamentos = document.getElementById('sel_orcamentos');
+
+    let frm_add_item = document.getElementById('frm_add_item');
+    let hdn_id_orcamento = document.getElementById('hdn_id_orcamento');
+    let hdn_id_usuario = document.getElementById('hdn_id_usuario');
+    let hdn_id_item = document.getElementById('hdn_id_item');
+    let hdn_quantidade = document.getElementById('hdn_quantidade');
+
+    // return alert(sel_orcamentos.value);
+    if (sel_orcamentos.value == '0') {
+        alert("Por favor, selecione um orçamento antes de prosseguir");
+        return sel_orcamentos.focus();
+    }
+
+    hdn_id_orcamento.value = sel_orcamentos.value;
+    hdn_id_usuario.value = id_usuario;
+    hdn_id_item.value = id_item;
+    hdn_quantidade.value = txt_quantidade.value;
+
+    $('#frm_add_item').trigger("submit");
+}
+
+function selecionarOrcamento(obj) {
+    window.location = './adicionar_itens.php?id_orcamento=' + obj.value;
+}
+
 function diminuirQuantidade(obj) {
     let txt_quantidade = document.getElementById('txt_quantidade' + obj.dataset.item);
     let quantidade = parseInt(txt_quantidade.value);

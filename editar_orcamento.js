@@ -1,4 +1,38 @@
+function editarIdClienteOrcamento(obj) {
+    let id_orcamento = obj.dataset.orcamento;
+    let id_cliente = obj.value;
 
+    let hdn_editar_orcamento_editar_cliente_id_orcamento = document.getElementById('hdn_editar_orcamento_editar_cliente_id_orcamento');
+    let hdn_editar_orcamento_editar_cliente_id_cliente = document.getElementById('hdn_editar_orcamento_editar_cliente_id_cliente');
+
+    hdn_editar_orcamento_editar_cliente_id_orcamento.value = id_orcamento;
+    hdn_editar_orcamento_editar_cliente_id_cliente.value = id_cliente;
+
+    $('#frm_editar_orcamento_id_cliente').trigger("submit");
+}
+
+function excluirItemOrcamento(obj) {
+    let id_orcamento = obj.dataset.orcamento;
+    let id_item = obj.dataset.item;
+
+    let hdn_editar_orcamento_excluir_item_id_orcamento = document.getElementById('hdn_editar_orcamento_excluir_item_id_orcamento');
+    let hdn_editar_orcamento_excluir_item_id_item = document.getElementById('hdn_editar_orcamento_excluir_item_id_item');
+
+    hdn_editar_orcamento_excluir_item_id_orcamento.value = id_orcamento;
+    hdn_editar_orcamento_excluir_item_id_item.value = id_item;
+
+    $('#frm_editar_orcamento_id_item').trigger("submit");
+}
+
+function excluirOrcamento(obj) {
+    let id_orcamento = obj.dataset.orcamento;
+
+    let hdn_editar_orcamento_excluir_orcamento_id_orcamento = document.getElementById('hdn_editar_orcamento_excluir_orcamento_id_orcamento');
+
+    hdn_editar_orcamento_excluir_orcamento_id_orcamento.value = id_orcamento;
+
+    $('#frm_editar_orcamento_id_orcamento').trigger("submit");
+}
 
 $(document).ready(function() {
 

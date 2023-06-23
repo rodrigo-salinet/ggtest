@@ -1,6 +1,6 @@
     <nav class="nav navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="mainNav">
         <div class="container-fluid">
-            <span class="navbar-brand" title="Sistema de Orçamento de Informática">S.O.I.</span>
+            <span href="index.php" class="navbar-brand" title="Sistema de Orçamento de Informática">S.O.I.</span>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-align-justify"></i>
             </button>
@@ -13,10 +13,10 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="adicionar_itens.php">Adicionar Itens a um orçamento</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_novo_item')">Novo Item</a></li>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_editar_item')">Editar Item</a></li>
+                            <li><a class="dropdown-item" href="novo_item.php">Novo Item</a></li>
+                            <li><a class="dropdown-item" href="editar_item.php">Editar Item</a></li>
                             <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_excluir_item')">Excluir Item</a></li>
+                            <li><a class="dropdown-item" href="excluir_item.php">Excluir Item</a></li>
                             <?php } ?>
                         </ul>
                     </li>
@@ -25,10 +25,10 @@
                             Clientes
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_novo_cliente')">Novo Cliente</a></li>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_editar_cliente')">Editar Cliente</a></li>
+                            <li><a class="dropdown-item" href="novo_cliente.php">Novo Cliente</a></li>
+                            <li><a class="dropdown-item" href="editar_cliente.php">Editar Cliente</a></li>
                             <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_excluir_cliente')">Excluir Cliente</a></li>
+                            <li><a class="dropdown-item" href="excluir_cliente.php">Excluir Cliente</a></li>
                             <?php } ?>
                         </ul>
                     </li>
@@ -37,24 +37,24 @@
                             Orçamentos
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_novo_orcamento')">Novo Orçamento</a></li>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_editar_orcamento')">Editar Orçamento</a></li>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_excluir_orcamento')">Excluir Orçamento</a></li>
+                            <li><a class="dropdown-item" href="novo_orcamento.php">Novo Orçamento</a></li>
+                            <li><a class="dropdown-item" href="editar_orcamento.php">Editar Orçamento</a></li>
+                            <li><a class="dropdown-item" href="excluir_orcamento.php">Excluir Orçamento</a></li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-gear"></i>
+                            <i class="fa fa-gear"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_novo_usuario')">Novo Usuário</a></li>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_editar_usuario')">Editar Usuário</a></li>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_excluir_usuario')">Excluir Usuário</a></li>
+                            <li><a class="dropdown-item" href="novo_usuario.php">Novo Usuário</a></li>
+                            <li><a class="dropdown-item" href="editar_usuario.php">Editar Usuário</a></li>
+                            <li><a class="dropdown-item" href="excluir_usuario.php">Excluir Usuário</a></li>
                             <?php } ?>
-                            <li><a class="dropdown-item" href="javascript:verSecao('sec_meu_cadastro')">Meu cadastro</a></li>
+                            <li><a class="dropdown-item" href="meu_cadastro.php">Meu cadastro</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="./sair.php"><i class="fa fa-remove text-danger"></i> Sair</a></li>
                         </ul>
@@ -62,7 +62,11 @@
                 </ul>
             </div>
             <div class="d-flex" role="search">
-                <select id="sel_orcamentos" class="form-select">
+            <?php
+                $arquivo_atual = explode('?', $_SERVER['REQUEST_URI'])[0];
+                if ($arquivo_atual == '/adicionar_itens.php') {
+            ?>
+                <select id="sel_orcamentos" class="form-select" onchange="selecionarOrcamento(this)">
                     <option value="0" selected>Selecione aqui um orçamento</option>
                     <?php
                         $str_sql_orcamentos = "select * from `tbl_orcamentos` where `id_usuario` = $id_usuario;";
@@ -88,6 +92,7 @@
                         }
                     ?>
                 </select>
+            <?php } ?>
             </div>
         </div>
     </nav>

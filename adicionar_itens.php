@@ -104,7 +104,7 @@ $id_usuario = $_SESSION['id_usuario'];
                             </div>
                             <?php } ?>
                             <?php if (@$_SESSION['tipo_usuario'] == 1) { ?>
-                            <button onclick="adicionarOrcamento(this)" class="btn btn-primary mx-auto d-block" data-user="<?php echo $_SESSION['id_usuario']; ?>" data-item="<?php echo $id_item; ?>">Adicionar</button>
+                            <!-- <button onclick="adicionarOrcamento(this)" class="btn btn-primary mx-auto d-block" data-user="<?php echo $_SESSION['id_usuario']; ?>" data-item="<?php echo $id_item; ?>">Adicionar</button> -->
                             <div class="container collapse border-0 mt-3 text-center" id="div_sucesso<?php echo $id_item; ?>">.</div>
                             <?php } ?>
                         </div>
@@ -126,6 +126,5 @@ $id_usuario = $_SESSION['id_usuario'];
     <?php require_once('scripts_js_rodape.php'); ?>
 
     <script type="text/javascript" src="adicionar_itens.js"></script>
-
 </body>
 </html>

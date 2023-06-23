@@ -124,19 +124,20 @@ $id_usuario = $_SESSION['id_usuario'];
                 <div class="col text-center">
                     <input type="text" class="form-control" id="txt_editar_orcamento_aprovado<?php echo $id_orcamento; ?>" value="<?php echo $orcamento_aprovado; ?>" disabled />
                 </div>
+            </div>
             <?php } ?>
+            <form method="post" id="frm_editar_orcamento_id_cliente" name="frm_editar_orcamento_id_cliente">
+                <input type="hidden" name="hdn_editar_orcamento_editar_cliente_id_orcamento" id="hdn_editar_orcamento_editar_cliente_id_orcamento" />
+                <input type="hidden" name="hdn_editar_orcamento_editar_cliente_id_cliente" id="hdn_editar_orcamento_editar_cliente_id_cliente" />
+            </form>
+            <form id="frm_editar_orcamento_id_item" name="frm_editar_orcamento_id_item">
+                <input type="hidden" name="hdn_editar_orcamento_excluir_item_id_orcamento" id="hdn_editar_orcamento_excluir_item_id_orcamento" />
+                <input type="hidden" name="hdn_editar_orcamento_excluir_item_id_item" id="hdn_editar_orcamento_excluir_item_id_item" />
+            </form>
+            <form id="frm_editar_orcamento_id_orcamento" name="frm_editar_orcamento_id_orcamento">
+                <input type="hidden" name="hdn_editar_orcamento_excluir_orcamento_id_orcamento" id="hdn_editar_orcamento_excluir_orcamento_id_orcamento" />
+            </form>
         </div>
-        <form method="post" id="frm_editar_orcamento_id_cliente" name="frm_editar_orcamento_id_cliente">
-            <input type="hidden" name="hdn_editar_orcamento_editar_cliente_id_orcamento" id="hdn_editar_orcamento_editar_cliente_id_orcamento" />
-            <input type="hidden" name="hdn_editar_orcamento_editar_cliente_id_cliente" id="hdn_editar_orcamento_editar_cliente_id_cliente" />
-        </form>
-        <form id="frm_editar_orcamento_id_item" name="frm_editar_orcamento_id_item">
-            <input type="hidden" name="hdn_editar_orcamento_excluir_item_id_orcamento" id="hdn_editar_orcamento_excluir_item_id_orcamento" />
-            <input type="hidden" name="hdn_editar_orcamento_excluir_item_id_item" id="hdn_editar_orcamento_excluir_item_id_item" />
-        </form>
-        <form id="frm_editar_orcamento_id_orcamento" name="frm_editar_orcamento_id_orcamento">
-            <input type="hidden" name="hdn_editar_orcamento_excluir_orcamento_id_orcamento" id="hdn_editar_orcamento_excluir_orcamento_id_orcamento" />
-        </form>
     </section>
 
     <?php require_once('scripts_js_rodape.php'); ?>
