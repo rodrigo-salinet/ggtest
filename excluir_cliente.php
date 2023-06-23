@@ -2,7 +2,7 @@
 session_start();
 require_once('conexao.php');
 
-if (!@$_SESSION['logado']) {
+if (!isset($_SESSION['logado'])) {
     header('Location: login.php?msg=' . htmlspecialchars("Para entrar no sistema é necessário estar cadastrado e logado."));
 }
 
@@ -14,23 +14,20 @@ $id_usuario = $_SESSION['id_usuario'];
 
 <head>
     <?php require_once('scripts_header.php'); ?>
-    <title>S.O.I. -> Sistema de Orçamentos de Informática</title>
+    <title>Excluir Cliente -> S.O.I. -> Sistema de Orçamentos de Informática</title>
 </head>
 
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="57">
     <?php require_once('navbar.php'); ?>
 
     <section class="content mt-4">
-        <div class="container" id="sec_novo_item">
+        <div class="container-fluid" id="sec_excluir_cliente">
             <div class="row">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
-                        <i class="fa fa-shopping-cart text-warning"></i>
-                            Seja bem vindo ao S.O.I. -> Sistema de Orçamentos de Informática!
+                        <i class="fa fa-users text-warning"></i>
+                        Excluir Cliente
                     </h5>
-                    <h3>
-                        Utilize o menu no topo para navegar nas opçoes do sistema.
-                    </h3>
                 </div>
             </div>
         </div>
@@ -38,7 +35,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <?php require_once('scripts_js_rodape.php'); ?>
 
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="excluir_cliente.js"></script>
 
 </body>
 </html>

@@ -1,32 +1,83 @@
-function fecharSecoes() {
-    let sec_itens = document.getElementById('sec_itens');
-    let sec_novo_orcamento = document.getElementById('sec_novo_orcamento');
-    let sec_orcamentos = document.getElementById('sec_orcamentos');
+function excluirOrcamento(obj) {
+    let id_orcamento = obj.dataset.orcamento;
 
-    sec_itens.classList.remove('show');
-    sec_novo_orcamento.classList.remove('show');
-    sec_orcamentos.classList.remove('show');
+    let hdn_editar_orcamento_excluir_orcamento_id_orcamento = document.getElementById('hdn_editar_orcamento_excluir_orcamento_id_orcamento');
+
+    hdn_editar_orcamento_excluir_orcamento_id_orcamento.value = id_orcamento;
+
+    $('#frm_editar_orcamento_id_orcamento').trigger("submit");
 }
 
-function verNovoOrcamento() {
+function excluirItemOrcamento(obj) {
+    let id_orcamento = obj.dataset.orcamento;
+    let id_item = obj.dataset.item;
+
+    let hdn_editar_orcamento_excluir_item_id_orcamento = document.getElementById('hdn_editar_orcamento_excluir_item_id_orcamento');
+    let hdn_editar_orcamento_excluir_item_id_item = document.getElementById('hdn_editar_orcamento_excluir_item_id_item');
+
+    hdn_editar_orcamento_excluir_item_id_orcamento.value = id_orcamento;
+    hdn_editar_orcamento_excluir_item_id_item.value = id_item;
+
+    $('#frm_editar_orcamento_id_item').trigger("submit");
+}
+
+function editarIdClienteOrcamento(obj) {
+    let id_orcamento = obj.dataset.orcamento;
+    let id_cliente = obj.value;
+
+    let hdn_editar_orcamento_editar_cliente_id_orcamento = document.getElementById('hdn_editar_orcamento_editar_cliente_id_orcamento');
+    let hdn_editar_orcamento_editar_cliente_id_cliente = document.getElementById('hdn_editar_orcamento_editar_cliente_id_cliente');
+
+    hdn_editar_orcamento_editar_cliente_id_orcamento.value = id_orcamento;
+    hdn_editar_orcamento_editar_cliente_id_cliente.value = id_cliente;
+
+    $('#frm_editar_orcamento_id_cliente').trigger("submit");
+}
+
+function verSecao(secao) {
+    let secoes = [
+        'sec_adicionar_itens',
+        'sec_novo_item',
+        'sec_editar_item',
+        'sec_excluir_item',
+        'sec_novo_orcamento',
+        'sec_editar_orcamento',
+        'sec_excluir_orcamento',
+        'sec_novo_cliente',
+        'sec_editar_cliente',
+        'sec_excluir_cliente',
+        'sec_novo_usuario',
+        'sec_editar_usuario',
+        'sec_excluir_usuario',
+        'sec_meu_cadastro'
+    ];
+
+    for (let i = 0; i < secoes.length; i++) {
+        document.getElementById(secoes[i]).classList.remove('show');
+    }
+
+    document.getElementById(secao).classList.add('show');
+}
+
+function novoOrcamento() {
     fecharSecoes();
 
     let sec_novo_orcamento = document.getElementById('sec_novo_orcamento');
     sec_novo_orcamento.classList.add('show');
 }
 
-function verOrcamentos() {
+function novoOrcamento() {
     fecharSecoes();
 
-    let sec_orcamentos = document.getElementById('sec_orcamentos');
-    sec_orcamentos.classList.add('show');
+    let sec_novo_orcamento = document.getElementById('sec_novo_orcamento');
+    sec_novo_orcamento.classList.add('show');
 }
 
-function verItens() {
+function adicionarItens() {
     fecharSecoes();
 
-    let sec_itens = document.getElementById('sec_itens');
-    sec_itens.classList.add('show');
+    let sec_adicionar_itens = document.getElementById('sec_adicionar_itens');
+    sec_adicionar_itens.classList.add('show');
 }
 
 function adicionarOrcamento(obj) {
@@ -54,43 +105,3 @@ function adicionarOrcamento(obj) {
 
     $('#frm_add_item').trigger("submit");
 }
-
-function diminuirQuantidade(obj) {
-    let txt_quantidade = document.getElementById('txt_quantidade' + obj.dataset.item);
-    let quantidade = parseInt(txt_quantidade.value);
-    if (quantidade > 1) {
-        quantidade -= 1;
-    }
-    txt_quantidade.value = quantidade;
-}
-
-function aumentarQuantidade(obj) {
-    let txt_quantidade = document.getElementById('txt_quantidade' + obj.dataset.item);
-    let quantidade = parseInt(txt_quantidade.value);
-    if (quantidade < 99) {
-        quantidade += 1;
-    }
-    txt_quantidade.value = quantidade;
-}
-
-$(document).ready(function() {
-    $('#frm_add_item').submit(function(e) {
-        let hdn_id_item = document.getElementById('hdn_id_item');
-        let div_sucesso = document.getElementById('div_sucesso' + hdn_id_item.value);
-        e.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: 'adicionar_item.php',
-            data: $(this).serialize(),
-            success: function(response) {
-                let jsonData = JSON.parse(response);
-                if (jsonData.success == "1") {
-                    div_sucesso.innerHTML = jsonData.message;
-                } else {
-                    div_sucesso.innerHTML = jsonData.error;
-                }
-                div_sucesso.classList.add("show");
-            }
-        });
-    });
-});

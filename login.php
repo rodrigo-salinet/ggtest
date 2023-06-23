@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt_BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <?php require_once('scripts_header.php'); ?>
     <title>Login -> Sistema de Orçamentos de Informática</title>
 </head>
 
@@ -26,4 +24,8 @@
 
     <h5>Não tem cadastro?</h5>
     <h6><a href="cadastrar_usuario.php">Cadastre-se aqui</a></h6>
+
+    <script type="text/javascript" src="login.js"></script>
+
 </body>
+</html>

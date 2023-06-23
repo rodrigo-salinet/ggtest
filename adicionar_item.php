@@ -16,8 +16,8 @@ if (!isset($_SESSION['logado'])) {
     $hdn_quantidade = $_POST['hdn_quantidade'];
 
     try {
-        $str_sql_itens_oracamentos = "select * from `tbl_itens_orcamentos` where `id_item` = $hdn_id_item and `id_orcamento` = $hdn_id_orcamento;";
-        $sql_itens_orcamentos = mysqli_query($conexao, $str_sql_itens_oracamentos);
+        $str_sql_itens_orcamentos = "select * from `tbl_itens_orcamentos` where `id_item` = $hdn_id_item and `id_orcamento` = $hdn_id_orcamento;";
+        $sql_itens_orcamentos = mysqli_query($conexao, $str_sql_itens_orcamentos);
         $qtd_itens_orcamentos = mysqli_num_rows($sql_itens_orcamentos);
 
         if ($qtd_itens_orcamentos > 0) {

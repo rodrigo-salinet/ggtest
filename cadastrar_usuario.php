@@ -3,12 +3,10 @@ session_start();
 require_once('conexao.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt_BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <?php require_once('scripts_header.php'); ?>
     <title>Cadastrar Usuário -> Sistema de Orçamentos de Informática</title>
 </head>
 
@@ -62,4 +60,8 @@ require_once('conexao.php');
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
+
+    <script type="text/javascript" src="cadastrar_usuario.js"></script>
+
 </body>
+</html>
