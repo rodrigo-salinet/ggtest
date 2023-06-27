@@ -11,8 +11,10 @@
                             Itens
                         </a>
                         <ul class="dropdown-menu">
+                            <?php if (@$_SESSION['tipo_usuario'] == 1) { ?>
                             <li><a class="dropdown-item" href="adicionar_itens.php">Adicionar Itens a um orçamento</a></li>
                             <li><hr class="dropdown-divider"></li>
+                            <?php } ?>
                             <li><a class="dropdown-item" href="novo_item.php">Novo Item</a></li>
                             <li><a class="dropdown-item" href="editar_item.php">Editar/Excluir Item</a></li>
                         </ul>
