@@ -9,11 +9,12 @@ $data['errors'] = null;
 if (!isset($_SESSION['logado'])) {
     $data['success'] = 0;
     $data['errors'] = "Usuário não logado.";
-} else if (isset($_POST['hdn_editar_orcamento_excluir_item_id_item'])) {
+} else if (isset($_POST['hdn_editar_orcamento_excluir_item_id_orcamento']) && isset($_POST['hdn_editar_orcamento_excluir_item_id_item'])) {
+    $hdn_editar_orcamento_excluir_item_id_orcamento = $_POST['hdn_editar_orcamento_excluir_item_id_orcamento'];
     $hdn_editar_orcamento_excluir_item_id_item = $_POST['hdn_editar_orcamento_excluir_item_id_item'];
 
     try {
-        $str_sql_excluir_item_orcamento = "delete from `tbl_itens_orcamentos` where `id` = $hdn_editar_orcamento_excluir_item_id_item;";
+        $str_sql_excluir_item_orcamento = "delete from `tbl_itens_orcamentos` where `id_orcamento` = $hdn_editar_orcamento_excluir_item_id_orcamento and `id_item` = $hdn_editar_orcamento_excluir_item_id_item;";
         $sql_excluir_item_orcamento = mysqli_query($conexao, $str_sql_excluir_item_orcamento);
         $data['message'] = '<i class="fa fa-check-circle-o text-success"></i> Item excluído com sucesso!';
     } catch (\Exception $e) {
