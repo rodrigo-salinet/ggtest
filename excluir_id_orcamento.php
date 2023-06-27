@@ -15,9 +15,9 @@ if (!isset($_SESSION['logado'])) {
     try {
         $str_sql_excluir_orcamento = "delete from `tbl_orcamentos` where `id` = $hdn_editar_orcamento_excluir_orcamento_id_orcamento;";
         $sql_excluir_orcamento = mysqli_query($conexao, $str_sql_excluir_orcamento);
-        $data['message'] = '<i class="fa fa-check-circle-o text-success"></i> Orçamento ' . $hdn_editar_orcamento_excluir_orcamento_id_orcamento . ' excluído com sucesso!';
+        $data['message'] = '<div class="col text-center"><i class="fa fa-check-circle-o text-success"></i> Orçamento ' . $hdn_editar_orcamento_excluir_orcamento_id_orcamento . ' excluído com sucesso! </div>';
     } catch (\Exception $e) {
-        $data['message'] = 'Não foi possível excluir o orçamento!' . $hdn_editar_orcamento_excluir_orcamento_id_orcamento;
+        $data['message'] = 'Não foi possível excluir o orçamento ' . $hdn_editar_orcamento_excluir_orcamento_id_orcamento . '!';
         $data['errors'] = "$e";
     }
 }
