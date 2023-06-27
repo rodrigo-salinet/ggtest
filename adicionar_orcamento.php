@@ -2,7 +2,7 @@
 session_start();
 require_once('conexao.php');
 
-$redirect = 'index.php';
+$redirect = 'novo_orcamento.php';
 $msg = "Nada aconteceu";
 
 if (!isset($_SESSION['logado'])) {
@@ -17,10 +17,9 @@ if (!isset($_SESSION['logado'])) {
         $sql_adicionar_item = mysqli_query($conexao, $str_sql_adicionar_orcamento);
         $msg = 'Orçamento adicionado com sucesso!';
     } catch (\Exception $e) {
-        $msg = "Ocorreu o erro: $e.";
+        $msg = "Ocorreu o erro: ." . str_replace(array("\r", "\n"), '', $e);
     }
 }
 
-return header('Location: ' . $redirect . '?msg=' . htmlspecialchars($msg));
-
+header('Location: ' . $redirect . '?msg=' . htmlspecialchars($msg));
 ?>
