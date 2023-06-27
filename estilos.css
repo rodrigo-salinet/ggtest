@@ -1,0 +1,8 @@
+a {
+    text-decoration: none;
+}
+
+.img-item {
+    max-height: 200px;
+    object-fit: contain;
+}
