@@ -20,8 +20,8 @@ $id_usuario = $_SESSION['id_usuario'];
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="57">
     <?php require_once('navbar.php'); ?>
 
-    <section class="content mt-4">
-        <div class="container-fluid" id="sec_novo_cliente">
+    <section class="content" id="sec_novo_cliente">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
@@ -30,6 +30,16 @@ $id_usuario = $_SESSION['id_usuario'];
                     </h5>
                 </div>
             </div>
+            <form action="adicionar_cliente.php" method="post" id="frm_novo_cliente" name="frm_novo_cliente">
+                <div class="row">
+                    <div class="col mb-3 text-center">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="txt_nome_cliente" id="txt_nome_cliente" placeholder="Digite aqui o nome do cliente" />
+                            <input type="submit" class="btn btn-outline-success" value="Criar Cliente">
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </section>
 
