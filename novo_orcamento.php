@@ -20,8 +20,8 @@ $id_usuario = $_SESSION['id_usuario'];
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="57">
     <?php require_once('navbar.php'); ?>
 
-    <section class="content mt-4">
-        <div class="container-fluid" id="sec_novo_orcamento">
+    <section class="content" id="sec_novo_orcamento">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
@@ -56,7 +56,6 @@ $id_usuario = $_SESSION['id_usuario'];
                     </div>
                 </div>
             </form>
-            <div class="container collapse" id="div_sucesso_novo_orcamento">.</div>
         </div>
     </section>
 
