@@ -1,11 +1,11 @@
-    <nav class="nav navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="mainNav">
         <div class="container-fluid">
             <span href="index.php" class="navbar-brand" title="Sistema de Orçamento de Informática">S.O.I.</span>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-align-justify"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="nav nav-underline navbar-nav me-auto">
+            <div class="navbar-collapse collapse" id="navbarNav">
+                <ul class="nav-underline navbar-nav me-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Itens
@@ -14,10 +14,7 @@
                             <li><a class="dropdown-item" href="adicionar_itens.php">Adicionar Itens a um orçamento</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="novo_item.php">Novo Item</a></li>
-                            <li><a class="dropdown-item" href="editar_item.php">Editar Item</a></li>
-                            <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
-                            <li><a class="dropdown-item" href="excluir_item.php">Excluir Item</a></li>
-                            <?php } ?>
+                            <li><a class="dropdown-item" href="editar_item.php">Editar/Excluir Item</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -26,10 +23,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="novo_cliente.php">Novo Cliente</a></li>
-                            <li><a class="dropdown-item" href="editar_cliente.php">Editar Cliente</a></li>
-                            <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
-                            <li><a class="dropdown-item" href="excluir_cliente.php">Excluir Cliente</a></li>
-                            <?php } ?>
+                            <li><a class="dropdown-item" href="editar_cliente.php">Editar/Excluir Cliente</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -38,8 +32,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="novo_orcamento.php">Novo Orçamento</a></li>
-                            <li><a class="dropdown-item" href="editar_orcamento.php">Editar Orçamento</a></li>
-                            <li><a class="dropdown-item" href="excluir_orcamento.php">Excluir Orçamento</a></li>
+                            <li><a class="dropdown-item" href="editar_orcamento.php">Editar/Excluir Orçamento</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -51,8 +44,7 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
                             <li><a class="dropdown-item" href="novo_usuario.php">Novo Usuário</a></li>
-                            <li><a class="dropdown-item" href="editar_usuario.php">Editar Usuário</a></li>
-                            <li><a class="dropdown-item" href="excluir_usuario.php">Excluir Usuário</a></li>
+                            <li><a class="dropdown-item" href="editar_usuario.php">Editar/Excluir Usuário</a></li>
                             <?php } ?>
                             <li><a class="dropdown-item" href="meu_cadastro.php">Meu cadastro</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -61,11 +53,11 @@
                     </li>
                 </ul>
             </div>
-            <div class="d-flex" role="search">
             <?php
                 $arquivo_atual = explode('?', $_SERVER['REQUEST_URI'])[0];
                 if ($arquivo_atual == '/adicionar_itens.php') {
             ?>
+            <div class="d-flex" role="search">
                 <select id="sel_orcamentos" class="form-select" onchange="selecionarOrcamento(this)">
                     <option value="0" selected>Selecione aqui um orçamento</option>
                     <?php
@@ -83,8 +75,15 @@
                                 $cliente = mysqli_fetch_array($sql_cliente);
                                 $nome_cliente = $cliente['nome'];
                             }
+                            $selecionado = "";
+                            if (isset($_GET['id_orcamento'])) {
+                                $id_orcamento_get = $_GET['id_orcamento'];
+                                if ($id_orcamento_get == $id_orcamento) {
+                                    $selecionado = "selected";
+                                }
+                            }
                     ?>
-                    <option value="<?php echo $id_orcamento; ?>" id="opt_orcamento<?php echo $id_orcamento; ?>">
+                    <option value="<?php echo $id_orcamento; ?>" id="opt_orcamento<?php echo $id_orcamento; ?>" <?php echo $selecionado; ?>>
                         O: <?php echo $id_orcamento; ?> 
                         | C: <?php echo $nome_cliente; ?>
                     </option>
@@ -92,17 +91,29 @@
                         }
                     ?>
                 </select>
-            <?php } ?>
             </div>
+            <?php } ?>
         </div>
     </nav>
 
-    <header class="content">
-        <div class="container collapse show" id="sec_cabecalho">
+    <header class="content mb-4 mt-4">
+        <div class="container collapse show" id="sec_header">
             <div class="row">
-                <div class="col-md-4 mb-4 mt-4">
+                <div class="col-md-4">
                     &nbsp;
                 </div>
             </div>
         </div>
     </header>
+
+    <?php if (isset($_GET['msg'])) { ?>
+    <section class="content" id="sec_msg">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col mb-4">
+                    <h5 class="h5 text-center"><i class="fa fa-bullhorn text-danger"></i> <<< <i><?php echo $_GET['msg']; ?></i></h5>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php } ?>
