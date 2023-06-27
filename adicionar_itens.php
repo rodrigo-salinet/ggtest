@@ -19,26 +19,30 @@ $id_usuario = $_SESSION['id_usuario'];
 
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="57">
     <?php require_once('navbar.php'); ?>
-    <section class="content">
-        <div class="container-fluid" id="sec_adicionar_itens">
-            <?php if (isset($_GET['msg'])) { ?>
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <h5 class="h5 text-center"><i class="fa fa-bullhorn text-danger"></i> <<< <i><?php echo $_GET['msg']; ?></i></h5>
-                </div>
-            </div>
-            <?php } ?>
+
+    <section class="content" id="sec_adicionar_itens">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-shopping-cart text-warning"></i>
-                            Adicionar Itens a um Orçamento
-                        </i>
+                        Adicionar Itens a um Orçamento
                     </h5>
                 </div>
             </div>
+            <?php if (!isset($_GET['id_orcamento']))  { ?>
+            <div class="row">
+                <div class="col mb-3 text-center">
+                    <h5 class="h5 text-center">
+                        <i class="fa fa-ban text-danger"></i>
+                        Selecione um orçamento no canto superior <i class="fa fa-arrow-up text-success"></i> direito <i class="fa fa-arrow-right text-success"></i> para continuar
+                    </h5>
+                </div>
+            </div>
+            <?php } else { ?>
             <div class="row">
                 <?php
+                    $id_orcamento_get = $_GET['id_orcamento'];
                     $str_sql_itens = "select * from `tbl_itens`;";
                     $sql_itens = mysqli_query($conexao, $str_sql_itens);
                     $qtd_itens = mysqli_num_rows($sql_itens);
@@ -46,25 +50,37 @@ $id_usuario = $_SESSION['id_usuario'];
                         $item = mysqli_fetch_array($sql_itens);
                         $id_item = $item['id'];
                         $imagem_item = $item['imagem'];
+                        if ($imagem_item == "") {
+                            $imagem_item = "sem-foto.jpg";
+                        }
                         $nome_item = $item['nome'];
                         $descricao_item = $item['descricao'];
+
+                        $str_sql_itens_orcamentos = "select * from `tbl_itens_orcamentos`where `id_item` = $id_item and `id_orcamento` = $id_orcamento_get;";
+                        $sql_itens_orcamentos = mysqli_query($conexao, $str_sql_itens_orcamentos);
+                        $qtd_itens_orcamentos = mysqli_num_rows($sql_itens_orcamentos);
+
+                        $quantidade_item_orcamento = 0;
+                        for ($io = 0; $io < $qtd_itens_orcamentos; $io++) {
+                            $itens_orcamentos = mysqli_fetch_array($sql_itens_orcamentos);
+                            $quantidade_item_orcamento = $itens_orcamentos['quantidade'];
+                        }
                 ?>
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <img class="card-img-top" src="<?php echo "./imagens/$imagem_item"; ?>" alt="Produto 1" loading="lazy">
+                <div class="col-auto mb-3">
+                    <div class="card text-center" style="width: 18rem;">
+                        <img class="card-img-top img-item" src="<?php echo "./imagens/$imagem_item"; ?>" alt="Produto 1" loading="lazy" />
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $nome_item; ?></h5>
                             <p class="card-text"><?php echo $descricao_item; ?></p>
+                            <p class="card-text">ID: <?php echo $id_item; ?></p>
                             <div class="text-center">Quantidade</div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text bg-warning">
-                                    <button class="rounded border-0" onclick="diminuirQuantidade(this);" data-item="<?php echo $id_item; ?>">-</button>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <button class="rounded border-0" onclick="diminuirQuantidade(this);" data-item="<?php echo $id_item; ?>"><i class="fa fa-minus text-danger"></i></button>
                                 </span>
-                                <div class="form-control">
-                                    <input type="text" class="form-control text-center border-0" maxlength="2" id="txt_quantidade<?php echo $id_item; ?>" placeholder="Quantidade" aria-label="Quantidade" value="1">
-                                </div>
-                                <span class="input-group-text bg-success">
-                                    <button class="rounded border-0" onclick="aumentarQuantidade(this);" data-item="<?php echo $id_item; ?>">+</button>
+                                <input type="text" class="form-control text-center border-0" maxlength="2" data-item="<?php echo $id_item; ?>" id="txt_quantidade<?php echo $id_item; ?>" value="<?php echo $quantidade_item_orcamento; ?>" disabled>
+                                <span class="input-group-text">
+                                    <button class="rounded border-0" onclick="aumentarQuantidade(this);" data-item="<?php echo $id_item; ?>"><i class="fa fa-plus text-success"></i></button>
                                 </span>
                             </div>
                             <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
@@ -101,7 +117,6 @@ $id_usuario = $_SESSION['id_usuario'];
                                     ?>
                                 </select>
                             </div>
-                            </div>
                             <?php } ?>
                             <?php if (@$_SESSION['tipo_usuario'] == 1) { ?>
                             <!-- <button onclick="adicionarOrcamento(this)" class="btn btn-primary mx-auto d-block" data-user="<?php echo $_SESSION['id_usuario']; ?>" data-item="<?php echo $id_item; ?>">Adicionar</button> -->
@@ -114,12 +129,19 @@ $id_usuario = $_SESSION['id_usuario'];
                     }
                 ?>
             </div>
+            <?php } ?>
         </div>
         <form method="post" id="frm_add_item" name="frm_add_item">
             <input type="hidden" name="hdn_id_orcamento" id="hdn_id_orcamento" />
             <input type="hidden" name="hdn_id_usuario" id="hdn_id_usuario" />
             <input type="hidden" name="hdn_id_item" id="hdn_id_item" />
             <input type="hidden" name="hdn_quantidade" id="hdn_quantidade" />
+        </form>
+        <form method="post" id="frm_atualizar_quantidade" name="frm_atualizar_quantidade">
+            <input type="hidden" name="hdn_atualizar_quantidade_id_orcamento" id="hdn_atualizar_quantidade_id_orcamento" />
+            <input type="hidden" name="hdn_atualizar_quantidade_id_usuario" id="hdn_atualizar_quantidade_id_usuario" />
+            <input type="hidden" name="hdn_atualizar_quantidade_id_item" id="hdn_atualizar_quantidade_id_item" />
+            <input type="hidden" name="hdn_atualizar_quantidade_txt_quantidade" id="hdn_atualizar_quantidade_txt_quantidade" />
         </form>
     </section>
 
