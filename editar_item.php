@@ -20,8 +20,8 @@ $id_usuario = $_SESSION['id_usuario'];
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="57">
     <?php require_once('navbar.php'); ?>
 
-    <section class="content mt-4">
-        <div class="container-fluid" id="sec_editar_item">
+    <section class="content" id="sec_editar_item">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
@@ -30,12 +30,105 @@ $id_usuario = $_SESSION['id_usuario'];
                     </h5>
                 </div>
             </div>
+            <?php
+                $str_sql_itens = "select * from `tbl_itens`;";
+                $sql_itens = mysqli_query($conexao, $str_sql_itens);
+                $qtd_itens = mysqli_num_rows($sql_itens);
+
+                for($i = 0; $i < $qtd_itens; $i++) {
+                    $item = mysqli_fetch_array($sql_itens);
+                    $id_item = $item['id'];
+                    $imagem_item = $item['imagem'];
+                    if ($imagem_item == "") {
+                        $imagem_item = "sem-foto.jpg";
+                    }
+                $nome_item = $item['nome'];
+                    $descricao_item = $item['descricao'];
+            ?>
+            <div class="row border-bottom border-5 border-dark mb-3 item<?php echo $id_item; ?>">
+                <div class="col text-center">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="row text-center item<?php echo $id_item; ?>" id="div_id_item<?php echo $id_item; ?>">
+                <div class="col mb-3 text-center">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">ID</span>
+                        <input type="text" class="form-control" name="txt_editar_id_item<?php echo $id_item; ?>" id="txt_editar_id_item<?php echo $id_item; ?>" value="<?php echo $id_item; ?>" />
+                        <a href="#" onclick="excluirItem(this)" data-item="<?php echo $id_item; ?>" class="input-group-text"><i class="fa fa-trash text-danger"></i></a>
+                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_item_id_item<?php echo $id_item; ?>">
+                        .
+                    </div>
+                </div>
+            </div>
+            <div class="row item<?php echo $id_item; ?>">
+                <div class="col mb-3 text-center">
+                    <img src="./imagens/<?php echo $imagem_item; ?>" loading="lazy" class="img-item mb-3" id="img_editar_item<?php echo $id_item; ?>">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Editar Imagem</span>
+                        <input type="file" class="form-control" name="fil_upload_imagem<?php echo $id_item; ?>" id="fil_upload_imagem<?php echo $id_item; ?>" />
+                        <a href="#" onclick="alterarImagemItem(this)" data-item="<?php echo $id_item; ?>" class="input-group-text"><i class="fa fa-eraser text-warning"></i></a>
+                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_item_imagem<?php echo $id_item; ?>">
+                        .
+                    </div>
+                </div>
+            </div>
+            <div class="row item<?php echo $id_item; ?>">
+                <div class="col mb-3 text-center">
+                    <div class="input-group has-validation mb-3">
+                        <span class="input-group-text is-invalid">@</span>
+                        <div class="form-floating is-invalid">
+                            <input type="text" class="form-control is-invalid" name="txt_nome_item<?php echo $id_item; ?>" id="txt_nome_item<?php echo $id_item; ?>" placeholder="Digite aqui o nome do item" value="<?php echo $nome_item; ?>" required />
+                            <label for="txt_nome_item<?php echo $id_item; ?>">Nome</label>
+                        </div>
+                        <a href="#" onclick="alterarNomeItem(this)" data-item="<?php echo $id_item; ?>" class="input-group-text"><i class="fa fa-eraser text-warning"></i></a>
+                        <div class="invalid-feedback">
+                            Por favor, digite um nome acima para poder Editar Item.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row item<?php echo $id_item; ?>">
+                <div class="col text-center">
+                    <div class="input-group has-validation mb-3">
+                        <span class="input-group-text">@</span>
+                        <div class="form-floating is-invalid">
+                            <input type="text" class="form-control is-invalid" name="txt_descricao_item<?php echo $id_item; ?>" id="txt_descricao_item<?php echo $id_item; ?>" placeholder="Digite aqui a descrição do item" value="<?php echo $descricao_item; ?>" required />
+                            <label for="txt_descricao_item<?php echo $id_item; ?>">Descrição</label>
+                        </div>
+                        <a href="#" onclick="alterarDescricaoItem(this)" data-item="<?php echo $id_item; ?>" class="input-group-text"><i class="fa fa-eraser text-warning"></i></a>
+                        <div class="invalid-feedback">
+                            Por favor, digite uma descrição acima para poder Editar Item.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
+            <form method="post" id="frm_editar_item_id_item" name="frm_editar_item_id_item" enctype="multipart/form-data">
+                <input type="hidden" name="hdn_editar_item_excluir_item_id_item" id="hdn_editar_item_excluir_item_id_item" />
+            </form>
+            <form method="post" id="frm_editar_item_imagem" name="frm_editar_item_imagem" enctype="multipart/form-data">
+                <input type="hidden" name="hdn_editar_item_imagem_id_item" id="hdn_editar_item_imagem_id_item" />
+            </form>
+            <form method="post" id="frm_editar_item_nome" name="frm_editar_item_nome">
+                <input type="hidden" name="hdn_editar_item_nome_id_item" id="hdn_editar_item_nome_id_item" />
+                <input type="hidden" name="hdn_editar_item_nome" id="hdn_editar_item_nome" />
+            </form>
+            <form method="post" id="frm_editar_item_descricao" name="frm_editar_item_descricao">
+                <input type="hidden" name="hdn_editar_item_descricao_id_item" id="hdn_editar_item_descricao_id_item" />
+                <input type="hidden" name="hdn_editar_item_descricao" id="hdn_editar_item_descricao" />
+            </form>
         </div>
     </section>
 
     <?php require_once('scripts_js_rodape.php'); ?>
 
     <script type="text/javascript" src="editar_item.js"></script>
+    <script type="text/javascript">
+
+    </script>
 
 </body>
 </html>
