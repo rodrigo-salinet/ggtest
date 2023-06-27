@@ -42,10 +42,6 @@
                             <i class="fa fa-gear"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
-                            <li><a class="dropdown-item" href="novo_usuario.php">Novo Usuário</a></li>
-                            <li><a class="dropdown-item" href="editar_usuario.php">Editar/Excluir Usuário</a></li>
-                            <?php } ?>
                             <li><a class="dropdown-item" href="meu_cadastro.php">Meu cadastro</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="./sair.php"><i class="fa fa-remove text-danger"></i> Sair</a></li>
