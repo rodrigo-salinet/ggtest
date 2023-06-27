@@ -20,8 +20,8 @@ $id_usuario = $_SESSION['id_usuario'];
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="57">
     <?php require_once('navbar.php'); ?>
 
-    <section class="content mt-4">
-        <div class="container" id="sec_novo_item">
+    <section class="content" id="sec_novo_item">
+        <div class="container">
             <div class="row">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
@@ -29,7 +29,7 @@ $id_usuario = $_SESSION['id_usuario'];
                             Seja bem vindo ao S.O.I. -> Sistema de Orçamentos de Informática!
                     </h5>
                     <h3>
-                        Utilize o menu no topo para navegar nas opçoes do sistema.
+                        Utilize o menu no topo para navegar nas opções do sistema.
                     </h3>
                 </div>
             </div>
