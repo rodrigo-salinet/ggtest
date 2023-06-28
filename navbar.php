@@ -17,6 +17,9 @@
                             <?php } ?>
                             <li><a class="dropdown-item" href="novo_item.php">Novo Item</a></li>
                             <li><a class="dropdown-item" href="editar_item.php">Editar/Excluir Item</a></li>
+                            <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
+                            <li><a class="dropdown-item" href="precos_item.php">Preços Item</a></li>
+                            <?php } ?>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -38,6 +41,8 @@
                             <li><a class="dropdown-item" href="editar_orcamento.php">Editar/Excluir Orçamento</a></li>
                             <?php } else { ?>
                             <li><a class="dropdown-item" href="aprovar_orcamentos.php">Aprovar Orçamentos</a></li>
+                            <li><a class="dropdown-item" href="novo_status_orcamento.php">Novo Status de Orçamento</a></li>
+                            <li><a class="dropdown-item" href="editar_status_orcamento.php">Editar/Excluir Status de Orçamento</a></li>
                             <?php } ?>
                         </ul>
                     </li>
