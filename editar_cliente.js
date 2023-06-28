@@ -30,9 +30,7 @@ $(document).ready(function() {
     $('#frm_editar_cliente_txt_cliente').submit(function(e) {
         e.preventDefault();
         let hdn_editar_cliente_id_cliente = document.getElementById('hdn_editar_cliente_id_cliente');
-        // console.log(hdn_editar_cliente_id_cliente);
         let div_sucesso_editar_cliente_nome_cliente = document.getElementById('div_sucesso_editar_cliente_nome_cliente' + hdn_editar_cliente_id_cliente.value);
-        console.log(div_sucesso_editar_cliente_nome_cliente);
         $.ajax({
             type: "POST",
             url: 'editar_nome_cliente.php',
