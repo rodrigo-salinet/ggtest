@@ -44,7 +44,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     Quantidades
                 </div>
                 <div class="col text-center">
-                    Aprovado
+                    Status
                 </div>
             </div>
             <?php
@@ -56,11 +56,15 @@ $id_usuario = $_SESSION['id_usuario'];
                     $orcamentos = mysqli_fetch_array($sql_orcamentos);
                     $id_orcamento = $orcamentos['id'];
                     $id_cliente_orcamento = $orcamentos['id_cliente'];
-                    $orcamento_aprovado = $orcamentos['aprovado'];
-                    if ($orcamento_aprovado == 0) {
-                        $orcamento_aprovado = "Não";
-                    } else {
-                        $orcamento_aprovado = "Sim";
+                    $id_status_orcamento = $orcamentos['id_status_orcamento'];
+
+                    $str_sql_status_orcamento = "select * from `tbl_status_orcamento` where `id` = $id_status_orcamento;";
+                    $sql_status_orcamento = mysqli_query($conexao, $str_sql_status_orcamento);
+                    $qtd_status_orcamento = mysqli_num_rows($sql_status_orcamento);
+
+                    for ($s = 0; $s < $qtd_status_orcamento; $s++) {
+                        $status_orcamento = mysqli_fetch_array($sql_status_orcamento);
+                        $status = $status_orcamento['status'];
                     }
             ?>
             <div class="row" id="div_row_orcamento<?php echo $id_orcamento; ?>">
@@ -145,7 +149,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     ?>
                 </div>
                 <div class="col text-center">
-                    <input type="text" class="form-control" id="txt_editar_orcamento_aprovado<?php echo $id_orcamento; ?>" value="<?php echo $orcamento_aprovado; ?>" disabled />
+                    <input type="text" class="form-control" id="status<?php echo $id_orcamento; ?>" value="<?php echo $status; ?>" disabled />
                 </div>
             </div>
             <?php } ?>
