@@ -55,7 +55,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     $nome_usuario = $usuario['nome'];
                     $login_usuario = $usuario['login'];
             ?>
-            <div class="row" id="div_row_usuario">
+            <div class="row mb-3" id="div_row_usuario">
                 <div class="col text-center">
                     <div class="input-group">
                         <input type="text" class="form-control" id="txt_editar_id_usuario" value="<?php echo $id_usuario; ?>" disabled />
