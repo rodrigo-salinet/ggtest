@@ -54,7 +54,7 @@ $(document).ready(function() {
         let div_row_status = document.getElementById('div_row_status' + hdn_editar_status_orcamento_excluir_id_status_orcamento.value);
         $.ajax({
             type: "POST",
-            url: 'excluir_id_status.php',
+            url: 'excluir_id_status_orcamento.php',
             data: $(this).serialize(),
             success: function(response) {
                 let jsonData = JSON.parse(response);
