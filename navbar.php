@@ -1,6 +1,6 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" id="mainNav">
         <div class="container-fluid">
-            <span href="index.php" class="navbar-brand" title="Sistema de Orçamento de Informática">S.O.I.</span>
+            <a href="./" class="navbar-brand d-flex align-items-center" title="Sistema de Orçamento de Informática">S.O.I.</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-align-justify"></i>
             </button>
@@ -33,8 +33,12 @@
                             Orçamentos
                         </a>
                         <ul class="dropdown-menu">
+                            <?php if (@$_SESSION['tipo_usuario'] == 1) { ?>
                             <li><a class="dropdown-item" href="novo_orcamento.php">Novo Orçamento</a></li>
                             <li><a class="dropdown-item" href="editar_orcamento.php">Editar/Excluir Orçamento</a></li>
+                            <?php } else { ?>
+                            <li><a class="dropdown-item" href="aprovar_orcamentos.php">Aprovar Orçamentos</a></li>
+                            <?php } ?>
                         </ul>
                     </li>
                 </ul>
@@ -84,6 +88,40 @@
                     <option value="<?php echo $id_orcamento; ?>" id="opt_orcamento<?php echo $id_orcamento; ?>" <?php echo $selecionado; ?>>
                         O: <?php echo $id_orcamento; ?> 
                         | C: <?php echo $nome_cliente; ?>
+                    </option>
+                    <?php
+                        }
+                    ?>
+                </select>
+            </div>
+            <?php } ?>
+
+            <?php
+                $arquivo_atual = explode('?', $_SERVER['REQUEST_URI'])[0];
+                if ($arquivo_atual == '/aprovar_orcamentos.php') {
+            ?>
+            <div class="d-flex" role="search">
+                <select id="sel_usuarios" class="form-select" onchange="selecionarUsuario(this)">
+                    <option value="0" selected>Selecione aqui um usuário</option>
+                    <?php
+                        $str_sql_usuarios = "select * from `tbl_usuarios` where `id_tipo` = 1;";
+                        $sql_usuarios = mysqli_query($conexao, $str_sql_usuarios);
+                        $qtd_usuarios = mysqli_num_rows($sql_usuarios);
+                        for ($o = 0; $o < $qtd_usuarios; $o++) {
+                            $usuarios = mysqli_fetch_array($sql_usuarios);
+                            $id_usuario = $usuarios['id'];
+                            $nome_usuario = $usuarios['nome'];
+
+                            $selecionado = "";
+                            if (isset($_GET['id_usuario'])) {
+                                $id_usuario_get = $_GET['id_usuario'];
+                                if ($id_usuario_get == $id_usuario) {
+                                    $selecionado = "selected";
+                                }
+                            }
+                    ?>
+                    <option value="<?php echo $id_usuario; ?>" id="opt_usuario<?php echo $id_usuario; ?>" <?php echo $selecionado; ?>>
+                        <?php echo $nome_usuario; ?>
                     </option>
                     <?php
                         }
