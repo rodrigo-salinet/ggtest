@@ -83,45 +83,7 @@ $id_usuario = $_SESSION['id_usuario'];
                                     <button class="rounded border-0" onclick="aumentarQuantidade(this);" data-item="<?php echo $id_item; ?>"><i class="fa fa-plus text-success"></i></button>
                                 </span>
                             </div>
-                            <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
-                            <div class="col-auto">
-                                <select class="form-select" id="precos_item<?php echo $id_item; ?>">
-                                    <option selected disable>Clique aqui para selecionar o preço do fornecedor</option>
-                                    <?php
-                                        $str_sql_precos_item = "select * from `tbl_precos_itens` where `id_item` = '$id_item' order by `preco` asc;";
-                                        $sql_precos_item = mysqli_query($conexao, $str_sql_precos_item);
-                                        $qtd_precos_item = mysqli_num_rows($sql_precos_item);
-                                        if ($qtd_precos_item > 3) { $qtd_precos_item = 3; }
-                                        for ($p = 0; $p < $qtd_precos_item; $p++) {
-                                            $precos_item = mysqli_fetch_array($sql_precos_item);
-                                            $id_preco = $precos_item['id'];
-                                            $id_fornecedor = $precos_item['id_fornecedor'];
-                                            $preco_item = $precos_item['preco'];
-                                            $str_sql_fornecedor = "select * from `tbl_fornecedores` where `id` = $id_fornecedor;";
-                                            $sql_fornecedor = mysqli_query($conexao, $str_sql_fornecedor);
-                                            $qtd_fornecedor = mysqli_num_rows($sql_fornecedor);
-                                            for ($f = 0; $f < $qtd_fornecedor; $f++) {
-                                                $fornecedor = mysqli_fetch_array($sql_fornecedor);
-                                                $fornecedor_nome = $fornecedor['nome'];
-                                            }
-                                            $destaque = "";
-                                            $txt_destaque = "";
-                                            if ($p == 0) {
-                                                $destaque = 'class="fw-bold"';
-                                                $txt_destaque = " -> Melhor preço!";
-                                            }
-                                    ?>
-                                    <option value="<?php echo $id_preco; ?>" <?php echo $destaque; ?>>R$<?php echo number_format($preco_item, 2, ',', '.'); ?> -> <?php echo $fornecedor_nome; ?><?php echo $txt_destaque; ?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                            <?php } ?>
-                            <?php if (@$_SESSION['tipo_usuario'] == 1) { ?>
-                            <!-- <button onclick="adicionarOrcamento(this)" class="btn btn-primary mx-auto d-block" data-user="<?php echo $_SESSION['id_usuario']; ?>" data-item="<?php echo $id_item; ?>">Adicionar</button> -->
                             <div class="container collapse border-0 mt-3 text-center" id="div_sucesso<?php echo $id_item; ?>">.</div>
-                            <?php } ?>
                         </div>
                     </div>
                 </div>
