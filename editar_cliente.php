@@ -48,7 +48,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     $id_cliente = $clientes['id'];
                     $nome_cliente = $clientes['nome'];
             ?>
-            <div class="row" id="div_row_cliente<?php echo $id_cliente; ?>">
+            <div class="row mb-3" id="div_row_cliente<?php echo $id_cliente; ?>">
                 <div class="col text-center">
                     <div class="input-group">
                         <input type="text" class="form-control" id="txt_editar_id_cliente<?php echo $id_cliente; ?>" value="<?php echo $id_cliente; ?>" disabled />
