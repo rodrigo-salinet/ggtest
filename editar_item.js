@@ -27,7 +27,6 @@ function alterarImagemItem(obj) {
     input_file_clone.attr("name", "fil_editar_item_imagem");
     input_file_clone.attr("style", "display: none;");
 
-    console.log(fil_editar_item_imagem);
     if (fil_editar_item_imagem !== null) {
         fil_editar_item_imagem.parentNode.removeChild(fil_editar_item_imagem);
     }
