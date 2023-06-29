@@ -66,7 +66,17 @@ $id_usuario = $_SESSION['id_usuario'];
             </div>
             <div class="row mb-3 item<?php echo $id_item; ?>">
                 <div class="col text-center">
-                    <img src="./imagens/<?php echo $imagem_item; ?>" loading="lazy" class="img-item mb-3" id="img_editar_item<?php echo $id_item; ?>">
+                    <div class="input-group text-center mb-3 justify-content-center">
+                        <img src="./imagens/<?php echo $imagem_item; ?>" loading="lazy" class="img-item" id="img_editar_item<?php echo $id_item; ?>">
+                        <?php
+                            $display = "flex";
+                            if ($imagem_item == "sem-foto.jpg") {
+                                $display = "none";
+                            }
+                        ?>
+                        <a id="lnk_excluir_imagem<?php echo $id_item; ?>" href="#stay" onclick="excluirImagem(this)" class="input-group-text" data-item="<?php echo $id_item; ?>" title="Excluir Imagem" style="display: <?php echo $display; ?>;"><i class="fa fa-trash fa-danger"></i></a>
+                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_item_excluir_imagem<?php echo $id_item; ?>"></div>
                     <div class="input-group">
                         <div class="form-floating">
                             <input type="file" class="form-control" id="fil_upload_imagem<?php echo $id_item; ?>" />
@@ -74,9 +84,7 @@ $id_usuario = $_SESSION['id_usuario'];
                         </div>
                         <a href="#" onclick="alterarImagemItem(this)" data-item="<?php echo $id_item; ?>" class="input-group-text" title="Alterar Imagem do Item"><i class="fa fa-eraser text-warning"></i></a>
                     </div>
-                    <div class="container collapse" id="div_sucesso_editar_item_imagem<?php echo $id_item; ?>">
-                        .
-                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_item_imagem<?php echo $id_item; ?>"></div>
                 </div>
             </div>
             <div class="row mb-3 item<?php echo $id_item; ?>">
@@ -104,6 +112,9 @@ $id_usuario = $_SESSION['id_usuario'];
             <?php } ?>
             <form method="post" id="frm_editar_item_id_item" name="frm_editar_item_id_item" enctype="multipart/form-data">
                 <input type="hidden" name="hdn_editar_item_excluir_item_id_item" id="hdn_editar_item_excluir_item_id_item" />
+            </form>
+            <form method="post" id="frm_editar_item_excluir_imagem" name="frm_editar_item_excluir_imagem">
+                <input type="hidden" name="hdn_editar_item_excluir_imagem" id="hdn_editar_item_excluir_imagem" />
             </form>
             <form method="post" id="frm_editar_item_imagem" name="frm_editar_item_imagem" enctype="multipart/form-data">
                 <input type="hidden" name="hdn_editar_item_imagem_id_item" id="hdn_editar_item_imagem_id_item" />
