@@ -46,6 +46,8 @@ $(document).ready(function() {
     $('#frm_editar_usuario_nome').submit(function(e) {
         e.preventDefault();
         let div_sucesso_editar_usuario_nome = document.getElementById('div_sucesso_editar_usuario_nome');
+        let nome_usuario = document.getElementById('nome_usuario');
+        let txt_editar_usuario_nome = document.getElementById('txt_editar_usuario_nome');
         $.ajax({
             type: "POST",
             url: 'editar_nome_usuario.php',
@@ -54,6 +56,7 @@ $(document).ready(function() {
                 let jsonData = JSON.parse(response);
                 if (jsonData.success == "1") {
                     div_sucesso_editar_usuario_nome.innerHTML = jsonData.message;
+                    nome_usuario.innerText = txt_editar_usuario_nome.value;
                 } else {
                     div_sucesso_editar_usuario_nome.innerHTML = jsonData.error;
                 }
