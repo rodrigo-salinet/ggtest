@@ -19,7 +19,8 @@
                             <li><a class="dropdown-item" href="editar_item.php">Editar/Excluir Item</a></li>
                             <?php if (@$_SESSION['tipo_usuario'] == 2) { ?>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="precos_itens.php">Preços Itens</a></li>
+                            <li><a class="dropdown-item" href="novo_preco_item.php">Novo Preço de Item</a></li>
+                            <li><a class="dropdown-item" href="editar_preco_item.php">Editar/Excluir Preço de Item</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="novo_fornecedor.php">Novo Fornecedor</a></li>
                             <li><a class="dropdown-item" href="editar_fornecedor.php">Editar/Excluir Fornecedor</a></li>
