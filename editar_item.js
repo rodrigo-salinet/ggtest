@@ -1,3 +1,16 @@
+function excluirImagem(obj) {
+    if (!confirm("Tem certeza de que deseja excluir esta imagem? Não será possível reverter esta ação depois!")) {
+        return false;
+    }
+
+    let id_item = obj.dataset.item;
+
+    let hdn_editar_item_excluir_imagem = document.getElementById('hdn_editar_item_excluir_imagem');
+    hdn_editar_item_excluir_imagem.value = id_item;
+
+    $('#frm_editar_item_excluir_imagem').trigger("submit");
+}
+
 function excluirItem(obj) {
     if (!confirm("Tem certeza de que deseja excluir este item? Não será possível reverter esta ação depois!")) {
         return false;
@@ -63,6 +76,28 @@ function alterarDescricaoItem(obj) {
 
 $(document).ready(function() {
 
+    $('#frm_editar_item_excluir_imagem').submit(function(e) {
+        e.preventDefault();
+        let hdn_editar_item_excluir_imagem = document.getElementById('hdn_editar_item_excluir_imagem');
+        let div_sucesso_editar_item_excluir_imagem = document.getElementById('div_sucesso_editar_item_excluir_imagem' + hdn_editar_item_excluir_imagem.value);
+        $.ajax({
+            type: "POST",
+            url: 'excluir_imagem_item.php',
+            data: $(this).serialize(),
+            success: function(response) {
+                let jsonData = JSON.parse(response);
+                if (jsonData.success == "1") {
+                    $('#img_editar_item' + hdn_editar_item_excluir_imagem.value).attr('src', './imagens/sem-foto.jpg');
+                    $('#lnk_excluir_imagem' + hdn_editar_item_excluir_imagem.value).attr('style', 'display: none;');
+                    div_sucesso_editar_item_excluir_imagem.innerHTML = jsonData.message;
+                } else {
+                    div_sucesso_editar_item_excluir_imagem.innerHTML = jsonData.error;
+                }
+                div_sucesso_editar_item_excluir_imagem.classList.add("show");
+            }
+        });
+    });
+
     $('#frm_editar_item_id_item').submit(function(e) {
         e.preventDefault();
         let hdn_editar_item_excluir_item_id_item = document.getElementById('hdn_editar_item_excluir_item_id_item');
@@ -100,6 +135,7 @@ $(document).ready(function() {
                     div_sucesso_editar_item_imagem.innerHTML = jsonData.message;
                     let icone_sucesso_editar_item_imagem = document.getElementById('icone_sucesso_editar_item_imagem');
                     $('#img_editar_item' + hdn_editar_item_imagem_id_item.value).attr('src', './imagens/' + icone_sucesso_editar_item_imagem.dataset.arquivo);
+                    $('#lnk_excluir_imagem' + hdn_editar_item_imagem_id_item.value).attr('style', 'display: flex;');
                 } else {
                     div_sucesso_editar_item_imagem.innerHTML = jsonData.error;
                 }
