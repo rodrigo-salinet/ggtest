@@ -73,12 +73,14 @@ $id_usuario = $_SESSION['id_usuario'];
                             <h5 class="card-title"><?php echo $nome_item; ?></h5>
                             <p class="card-text"><?php echo $descricao_item; ?></p>
                             <p class="card-text">ID: <?php echo $id_item; ?></p>
-                            <div class="text-center">Quantidade</div>
                             <div class="input-group">
                                 <span class="input-group-text">
                                     <button class="rounded border-0" onclick="diminuirQuantidade(this);" data-item="<?php echo $id_item; ?>"><i class="fa fa-minus text-danger"></i></button>
                                 </span>
-                                <input type="text" class="form-control text-center border-0" maxlength="2" data-item="<?php echo $id_item; ?>" id="txt_quantidade<?php echo $id_item; ?>" value="<?php echo $quantidade_item_orcamento; ?>" disabled>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control text-center border-0" maxlength="2" data-item="<?php echo $id_item; ?>" id="txt_quantidade<?php echo $id_item; ?>" value="<?php echo $quantidade_item_orcamento; ?>" disabled>
+                                    <label class="text-center" for="txt_quantidade<?php echo $id_item; ?>">Quantidade</label>
+                                </div>
                                 <span class="input-group-text">
                                     <button class="rounded border-0" onclick="aumentarQuantidade(this);" data-item="<?php echo $id_item; ?>"><i class="fa fa-plus text-success"></i></button>
                                 </span>
