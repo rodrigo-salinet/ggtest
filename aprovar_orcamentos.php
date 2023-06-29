@@ -94,6 +94,7 @@ $id_usuario = $_SESSION['id_usuario'];
                             $itens_orcamentos = mysqli_fetch_array($sql_itens_orcamentos);
                             $id_item_orcamento = $itens_orcamentos['id_item'];
                             $quantidade_item = $itens_orcamentos['quantidade'];
+                            $id_preco_itens_orcamentos = $itens_orcamentos['id_preco'];
 
                             $str_sql_item = "select * from `tbl_itens` where `id` = $id_item_orcamento;";
                             $sql_item = mysqli_query($conexao, $str_sql_item);
@@ -104,7 +105,7 @@ $id_usuario = $_SESSION['id_usuario'];
                                 $nome_item = $item['nome'];
                             }
                     ?>
-                    <div class="input-group">
+                    <div class="input-group mb-3">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="txt_editar_orcamento<?php echo $id_orcamento; ?>_id_item<?php echo $id_item_orcamento; ?>" value="<?php echo $nome_item; ?>" title="[ID <?php echo $id_item_orcamento; ?>]" disabled>
                             <label for="txt_editar_orcamento<?php echo $id_orcamento; ?>_id_item<?php echo $id_item_orcamento; ?>">Item</label>
@@ -114,10 +115,10 @@ $id_usuario = $_SESSION['id_usuario'];
                             <label for="txt_editar_orcamento<?php echo $id_orcamento; ?>_quantidade_item<?php echo $id_item_orcamento; ?>">Quantidade</label>
                         </div>
                         <div class="form-floating">
-                            <select class="form-select" id="sel_editar_orcamento<?php echo $id_orcamento; ?>_precos<?php echo $id_item; ?>" onchange="alterarPreco(this)" data-orcamento="<?php echo $id_orcamento; ?>" data-item="<?php echo $id_item; ?>">
+                            <select class="form-select" id="sel_editar_orcamento<?php echo $id_orcamento; ?>_precos<?php echo $id_item_orcamento; ?>" onchange="alterarPreco(this)" data-orcamento="<?php echo $id_orcamento; ?>" data-item="<?php echo $id_item_orcamento; ?>">
                                 <option selected disabled>Clique aqui para selecionar o preço do fornecedor</option>
                                 <?php
-                                    $str_sql_precos_item = "select * from `tbl_precos_itens` where `id_item` = '$id_item' order by `preco` asc;";
+                                    $str_sql_precos_item = "select * from `tbl_precos_itens` where `id_item` = '$id_item_orcamento' order by `preco` asc;";
                                     $sql_precos_item = mysqli_query($conexao, $str_sql_precos_item);
                                     $qtd_precos_item = mysqli_num_rows($sql_precos_item);
                                     if ($qtd_precos_item > 3) { $qtd_precos_item = 3; }
@@ -139,8 +140,12 @@ $id_usuario = $_SESSION['id_usuario'];
                                             $destaque = 'class="fw-bold"';
                                             $txt_destaque = " -> Melhor preço!";
                                         }
+                                        $selecionado = "";
+                                        if ($id_preco_itens_orcamentos == $id_preco) {
+                                            $selecionado = "selected";
+                                        }
                                 ?>
-                                <option value="<?php echo $id_preco; ?>" <?php echo $destaque; ?>>R$<?php echo number_format($preco_item, 2, ',', '.'); ?> -> <?php echo $fornecedor_nome; ?><?php echo $txt_destaque; ?></option>
+                                <option value="<?php echo $id_preco; ?>" <?php echo $destaque; ?> <?php echo $selecionado; ?>>R$<?php echo number_format($preco_item, 2, ',', '.'); ?> -> <?php echo $fornecedor_nome; ?><?php echo $txt_destaque; ?></option>
                                 <?php
                                     }
                                 ?>
@@ -148,6 +153,7 @@ $id_usuario = $_SESSION['id_usuario'];
                             <label for="sel_editar_orcamento<?php echo $id_orcamento; ?>_precos<?php echo $id_item; ?>">Preço</label>
                         </div>
                     </div>
+                    <div class="container collapse" id="div_sucesso_aprovar_orcamento<?php echo $id_orcamento; ?>_id_item<?php echo $id_item_orcamento; ?>"></div>
                     <?php } ?>
                 </div>
             </div>
@@ -181,6 +187,7 @@ $id_usuario = $_SESSION['id_usuario'];
             <?php } ?>
             <form id="frm_aprovar_orcamentos_preco" name="frm_aprovar_orcamentos_preco">
                 <input type="hidden" name="hdn_aprovar_orcamentos_preco_item_id_orcamento" id="hdn_aprovar_orcamentos_preco_item_id_orcamento" />
+                <input type="hidden" name="hdn_aprovar_orcamentos_preco_id_item" id="hdn_aprovar_orcamentos_preco_id_item" />
                 <input type="hidden" name="hdn_aprovar_orcamentos_preco_id_preco" id="hdn_aprovar_orcamentos_preco_id_preco" />
             </form>
             <form id="frm_aprovar_orcamentos_status" name="frm_aprovar_orcamentos_status">
