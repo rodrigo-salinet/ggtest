@@ -58,7 +58,17 @@
                             <i class="fa fa-gear"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="meu_cadastro.php">Meu cadastro</a></li>
+                            <?php
+                                $str_sql_usuario = "select * from `tbl_usuarios`where `id` = $id_usuario;";
+                                $sql_usuario = mysqli_query($conexao, $str_sql_usuario);
+                                $qtd_sql_usuario = mysqli_num_rows($sql_usuario);
+
+                                for ($u = 0; $u < $qtd_sql_usuario; $u++) {
+                                    $usuario = mysqli_fetch_array($sql_usuario);
+                                    $nome_usuario = $usuario['nome'];
+                                }
+                            ?>
+                            <li><a class="dropdown-item" href="meu_cadastro.php">Meu cadastro (<span class="text-blue" id="nome_usuario"><?php echo $nome_usuario; ?></span>)</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="./sair.php"><i class="fa fa-remove text-danger"></i> Sair</a></li>
                         </ul>
