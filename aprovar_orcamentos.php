@@ -115,7 +115,7 @@ $id_usuario = $_SESSION['id_usuario'];
                         </div>
                         <div class="form-floating">
                             <select class="form-select" id="sel_editar_orcamento<?php echo $id_orcamento; ?>_precos<?php echo $id_item; ?>" onchange="alterarPreco(this)" data-orcamento="<?php echo $id_orcamento; ?>" data-item="<?php echo $id_item; ?>">
-                                <option selected disable>Clique aqui para selecionar o preço do fornecedor</option>
+                                <option selected disabled>Clique aqui para selecionar o preço do fornecedor</option>
                                 <?php
                                     $str_sql_precos_item = "select * from `tbl_precos_itens` where `id_item` = '$id_item' order by `preco` asc;";
                                     $sql_precos_item = mysqli_query($conexao, $str_sql_precos_item);
