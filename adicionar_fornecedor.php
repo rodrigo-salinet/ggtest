@@ -13,8 +13,10 @@ if (!isset($_SESSION['logado'])) {
 
     try {
         $str_sql_adicionar_fornecedor = "insert into `tbl_fornecedores` (`nome`) values ('$txt_nome_fornecedor');";
-        $sql_adicionar_fornecedor = mysqli_query($conexao, $str_sql_adicionar_fornecedor);
-        $msg = 'Fornecedor adicionado com sucesso!';
+        if ($conexao->query($str_sql_adicionar_fornecedor) === TRUE) {
+            $last_id = $conexao->insert_id;
+            $msg = "Fornecedor $txt_nome_fornecedor [ID $last_id] adicionado com sucesso!";
+        }
     } catch (\Exception $e) {
         $msg = "Ocorreu o erro: ." . str_replace(array("\r", "\n"), '', $e);
     }
