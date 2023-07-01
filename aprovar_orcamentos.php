@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_aprovar_orcamentos">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-money text-warning"></i>
@@ -31,7 +31,7 @@ $id_usuario = $_SESSION['id_usuario'];
                 </div>
             </div>
             <?php if (!isset($_GET['id_usuario'])) { ?>
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-ban text-danger"></i>
@@ -52,12 +52,12 @@ $id_usuario = $_SESSION['id_usuario'];
                     $id_cliente_orcamento = $orcamentos['id_cliente'];
                     $id_status_orcamento = $orcamentos['id_status_orcamento'];
             ?>
-            <div class="row border-top border-5 border-dark mb-3 item3">
+            <div class="row align-items-center border-top border-5 border-dark mb-3 item3">
                 <div class="col mt-3 text-center">
                     Orçamento
                 </div>
             </div>
-            <div class="row mb-3" id="div_row_id_orcamento<?php echo $id_orcamento; ?>">
+            <div class="row align-items-center mb-3" id="div_row_id_orcamento<?php echo $id_orcamento; ?>">
                 <div class="col text-center">
                     <div class="form-floating">
                         <input type="text" class="form-control" id="txt_editar_id_orcamento<?php echo $id_orcamento; ?>" value="<?php echo $id_orcamento; ?>" disabled />
@@ -65,7 +65,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     </div>
                 </div>
             </div>
-            <div class="row mb-3" id="div_row_nome_orcamento<?php echo $id_orcamento; ?>">
+            <div class="row align-items-center mb-3" id="div_row_nome_orcamento<?php echo $id_orcamento; ?>">
                 <div class="col text-center">
                     <?php
                         $str_sql_clientes = "select * from `tbl_clientes` where `id` = $id_cliente_orcamento;";
@@ -83,7 +83,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     </div>
                 </div>
             </div>
-            <div class="row mb-3" id="div_row_itens_orcamento<?php echo $id_orcamento; ?>">
+            <div class="row align-items-center mb-3" id="div_row_itens_orcamento<?php echo $id_orcamento; ?>">
                 <div class="col text-center">
                     <?php
                         $str_sql_itens_orcamentos = "select * from `tbl_itens_orcamentos` where `id_orcamento` = $id_orcamento;";
@@ -99,6 +99,9 @@ $id_usuario = $_SESSION['id_usuario'];
                             $str_sql_item = "select * from `tbl_itens` where `id` = $id_item_orcamento;";
                             $sql_item = mysqli_query($conexao, $str_sql_item);
                             $qtd_item = mysqli_num_rows($sql_item);
+                            if ($qtd_item <= 0) {
+                                continue;
+                            }
 
                             for ($i = 0; $i < $qtd_item; $i++) {
                                 $item = mysqli_fetch_array($sql_item);
@@ -150,14 +153,14 @@ $id_usuario = $_SESSION['id_usuario'];
                                     }
                                 ?>
                             </select>
-                            <label for="sel_editar_orcamento<?php echo $id_orcamento; ?>_precos<?php echo $id_item; ?>">Preço</label>
+                            <label for="sel_editar_orcamento<?php echo $id_orcamento; ?>_precos<?php echo $id_item_orcamento; ?>">Preço</label>
                         </div>
                     </div>
                     <div class="container collapse" id="div_sucesso_aprovar_orcamento<?php echo $id_orcamento; ?>_id_item<?php echo $id_item_orcamento; ?>"></div>
                     <?php } ?>
                 </div>
             </div>
-            <div class="row mb-3" id="div_row_aprovar_orcamento<?php echo $id_orcamento; ?>">
+            <div class="row align-items-center mb-3" id="div_row_aprovar_orcamento<?php echo $id_orcamento; ?>">
                 <div class="col text-center">
                     <div class="form-floating">
                         <select class="form-select" data-orcamento="<?php echo $id_orcamento; ?>" id="sel_aprovar_orcamento_status<?php echo $id_orcamento; ?>" onchange="alterarStatus(this)" />
