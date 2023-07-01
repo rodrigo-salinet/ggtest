@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_meu_cadastro">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-vcard text-warning"></i>
@@ -30,7 +30,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     </h5>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row align-items-center mb-3">
                 <div class="col text-center">
                     ID Usuário
                 </div>
@@ -55,7 +55,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     $nome_usuario = $usuario['nome'];
                     $login_usuario = $usuario['login'];
             ?>
-            <div class="row mb-3" id="div_row_usuario">
+            <div class="row align-items-center mb-3" id="div_row_usuario">
                 <div class="col text-center">
                     <div class="input-group">
                         <input type="text" class="form-control" id="txt_editar_id_usuario" value="<?php echo $id_usuario; ?>" disabled />
@@ -64,29 +64,23 @@ $id_usuario = $_SESSION['id_usuario'];
                 <div class="col text-center">
                     <div class="input-group">
                         <input type="text" class="form-control" id="txt_editar_usuario_nome" value="<?php echo $nome_usuario; ?>">
-                        <a href="#" onclick="alterarNomeUsuario(this)" class="input-group-text" data-usuario="<?php echo $id_usuario; ?>"><i class="text-warning fa fa-eraser" title="Alterar este Nome do Usuário"></i></a>
+                        <a href="#stay" onclick="alterarNomeUsuario(this)" class="input-group-text" data-usuario="<?php echo $id_usuario; ?>"><i class="text-warning fa fa-eraser" title="Alterar este Nome do Usuário"></i></a>
                     </div>
-                    <div class="container collapse" id="div_sucesso_editar_usuario_nome">
-                        .
-                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_usuario_nome"></div>
                 </div>
                 <div class="col text-center">
                     <div class="input-group">
                         <input type="text" class="form-control" id="txt_editar_usuario_login" value="<?php echo $login_usuario; ?>">
-                        <a href="#" onclick="alterarLoginUsuario(this)" class="input-group-text" data-usuario="<?php echo $id_usuario; ?>"><i class="text-warning fa fa-eraser" title="Alterar este Login"></i></a>
+                        <a href="#stay" onclick="alterarLoginUsuario(this)" class="input-group-text" data-usuario="<?php echo $id_usuario; ?>"><i class="text-warning fa fa-eraser" title="Alterar este Login"></i></a>
                     </div>
-                    <div class="container collapse" id="div_sucesso_editar_usuario_login">
-                        .
-                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_usuario_login"></div>
                 </div>
                 <div class="col text-center">
                     <div class="input-group">
                         <input type="password" class="form-control" id="txt_editar_usuario_senha" />
-                        <a href="#" onclick="alterarSenhaUsuario(this)" class="input-group-text" data-usuario="<?php echo $id_usuario; ?>"><i class="text-warning fa fa-eraser" title="Alterar a Senha atual"></i></a>
+                        <a href="#stay" onclick="alterarSenhaUsuario(this)" class="input-group-text" data-usuario="<?php echo $id_usuario; ?>"><i class="text-warning fa fa-eraser" title="Alterar a Senha atual"></i></a>
                     </div>
-                    <div class="container collapse" id="div_sucesso_editar_usuario_senha">
-                        .
-                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_usuario_senha"></div>
                 </div>
             </div>
             <?php } ?>

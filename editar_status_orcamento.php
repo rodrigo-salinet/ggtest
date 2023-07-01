@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_editar_cliente">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-users text-warning"></i>
@@ -30,7 +30,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     </h5>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row align-items-center mb-3">
                 <div class="col text-center">
                     ID
                 </div>
@@ -48,22 +48,20 @@ $id_usuario = $_SESSION['id_usuario'];
                     $id_status_orcamento = $status_orcamento['id'];
                     $status = $status_orcamento['status'];
             ?>
-            <div class="row mb-3" id="div_row_status<?php echo $id_status_orcamento; ?>">
+            <div class="row align-items-center mb-3" id="div_row_status<?php echo $id_status_orcamento; ?>">
                 <div class="col text-center">
                     <div class="input-group">
                         <input type="text" class="form-control" id="txt_editar_id_status_orcamento<?php echo $id_status_orcamento; ?>" value="<?php echo $id_status_orcamento; ?>" disabled />
-                        <a href="#" onclick="excluirStatusOrcamento(this)" class="input-group-text" data-status="<?php echo $id_status_orcamento; ?>"><i class="text-danger fa fa-trash" title="Excluir Status de Orçamento"></i></a>
+                        <a href="#stay" onclick="excluirStatusOrcamento(this)" class="input-group-text" data-status="<?php echo $id_status_orcamento; ?>"><i class="text-danger fa fa-trash" title="Excluir Status de Orçamento"></i></a>
                     </div>
                     <div class="container collapse" id="div_sucesso_editar_status_orcamento_id_status<?php echo $id_status_orcamento; ?>"></div>
                 </div>
                 <div class="col text-center">
                     <div class="input-group">
                         <input class="form-control" id="txt_editar_status_orcamento<?php echo $id_status_orcamento; ?>" data-status="<?php echo $id_status_orcamento; ?>" value="<?php echo $status; ?>" />
-                        <a href="#" onclick="editarStatusOrcamento(this)" class="input-group-text" data-status="<?php echo $id_status_orcamento; ?>"><i class="text-warning fa fa-eraser" title="Alterar Status de Orcamento"></i></a>
+                        <a href="#stay" onclick="editarStatusOrcamento(this)" class="input-group-text" data-status="<?php echo $id_status_orcamento; ?>"><i class="text-warning fa fa-eraser" title="Alterar Status de Orcamento"></i></a>
                     </div>
-                    <div class="container collapse" id="div_sucesso_editar_status_orcamento_status<?php echo $id_status_orcamento; ?>">
-                        .
-                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_status_orcamento_status<?php echo $id_status_orcamento; ?>"></div>
                 </div>
             </div>
             <?php } ?>

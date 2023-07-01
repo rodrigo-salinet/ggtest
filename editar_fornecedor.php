@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_editar_fornecedor">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-users text-warning"></i>
@@ -30,7 +30,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     </h5>
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="row align-items-center mb-3">
                 <div class="col text-center">
                     ID
                 </div>
@@ -48,22 +48,20 @@ $id_usuario = $_SESSION['id_usuario'];
                     $id_fornecedor = $fornecedores['id'];
                     $nome_fornecedor = $fornecedores['nome'];
             ?>
-            <div class="row mb-3" id="div_row_fornecedor<?php echo $id_fornecedor; ?>">
+            <div class="row align-items-center mb-3" id="div_row_fornecedor<?php echo $id_fornecedor; ?>">
                 <div class="col text-center">
                     <div class="input-group">
                         <input type="text" class="form-control" id="txt_editar_id_fornecedor<?php echo $id_fornecedor; ?>" value="<?php echo $id_fornecedor; ?>" disabled />
-                        <a href="#" onclick="excluirFornecedor(this)" class="input-group-text" data-fornecedor="<?php echo $id_fornecedor; ?>"><i class="text-danger fa fa-trash" title="Excluir Fornecedor"></i></a>
+                        <a href="#stay" onclick="excluirFornecedor(this)" class="input-group-text" data-fornecedor="<?php echo $id_fornecedor; ?>"><i class="text-danger fa fa-trash" title="Excluir Fornecedor"></i></a>
                     </div>
                     <div class="container collapse" id="div_sucesso_editar_fornecedor_id_fornecedor<?php echo $id_item; ?>"></div>
                 </div>
                 <div class="col text-center">
                     <div class="input-group">
                         <input class="form-control" id="txt_editar_nome_fornecedor<?php echo $id_fornecedor; ?>" data-fornecedor="<?php echo $id_fornecedor; ?>" value="<?php echo $nome_fornecedor; ?>" />
-                        <a href="#" onclick="editarNomeFornecedor(this)" class="input-group-text" data-fornecedor="<?php echo $id_fornecedor; ?>"><i class="text-warning fa fa-eraser" title="Alterar Nome do Fornecedor"></i></a>
+                        <a href="#stay" onclick="editarNomeFornecedor(this)" class="input-group-text" data-fornecedor="<?php echo $id_fornecedor; ?>"><i class="text-warning fa fa-eraser" title="Alterar Nome do Fornecedor"></i></a>
                     </div>
-                    <div class="container collapse" id="div_sucesso_editar_fornecedor_nome_fornecedor<?php echo $id_fornecedor; ?>">
-                        .
-                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_fornecedor_nome_fornecedor<?php echo $id_fornecedor; ?>"></div>
                 </div>
             </div>
             <?php } ?>

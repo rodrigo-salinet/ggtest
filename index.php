@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_novo_item">
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-shopping-cart text-warning"></i>

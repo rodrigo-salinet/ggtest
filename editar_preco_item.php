@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_novo_preco_item">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-shopping-cart text-warning"></i>
@@ -42,24 +42,24 @@ $id_usuario = $_SESSION['id_usuario'];
                     $id_fornecedor_preco_item = $precos_itens['id_fornecedor'];
                     $preco_item = $precos_itens['preco'];
             ?>
-            <div class="row border-bottom border-5 border-dark mb-3 item<?php echo $id_item; ?>">
+            <div class="row align-items-center border-bottom border-5 border-dark mb-3 item<?php echo $id_item; ?>">
                 <div class="col text-center">
                     &nbsp;
                 </div>
             </div>
-            <div class="row" id="div_id_preco_item<?php echo $id_preco_item; ?>">
+            <div class="row align-items-center" id="div_id_preco_item<?php echo $id_preco_item; ?>">
                 <div class="col mb-3 text-center">
                     <div class="input-group">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="txt_id_preco_item<?php echo $id_preco_item; ?>" data-preco="<?php echo $id_preco_item;?>" value="<?php echo $id_preco_item; ?>" disabled />
                             <label for="txt_id_preco_item<?php echo $id_preco_item; ?>">ID</label>
                         </div>
-                        <a class="input-group-text" href="#" data-preco="<?php echo $id_preco_item; ?>" onclick="excluirPrecoItem(this)" title="Excluir Preço de Item"><i class="fa fa-trash text-danger"></i></a>
+                        <a class="input-group-text" href="#stay" data-preco="<?php echo $id_preco_item; ?>" onclick="excluirPrecoItem(this)" title="Excluir Preço de Item"><i class="fa fa-trash text-danger"></i></a>
                     </div>
                     <div class="container collapse" id="div_sucesso_excluir_id_preco_item<?php echo $id_preco_item; ?>"></div>
                 </div>
             </div>
-            <div class="row" id="div_id_item<?php echo $id_preco_item; ?>">
+            <div class="row align-items-center" id="div_id_item<?php echo $id_preco_item; ?>">
                 <div class="col mb-3 text-center">
                     <div class="form-floating">
                         <select class="form-select" id="sel_id_item<?php echo $id_preco_item; ?>" data-preco="<?php echo $id_preco_item; ?>" onchange="editarItem(this)">
@@ -88,7 +88,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     <div class="container collapse" id="div_sucesso_editar_id_item<?php echo $id_preco_item; ?>"></div>
                 </div>
             </div>
-            <div class="row" id="div_id_fornecedor<?php echo $id_preco_item; ?>">
+            <div class="row align-items-center" id="div_id_fornecedor<?php echo $id_preco_item; ?>">
                 <div class="col mb-3 text-center">
                     <div class="form-floating">
                         <select class="form-select" id="sel_id_fornecedor<?php echo $id_preco_item; ?>" data-preco="<?php echo $id_preco_item; ?>" onchange="editarFornecedor(this)">
@@ -116,7 +116,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     <div class="container collapse" id="div_sucesso_editar_id_fornecedor<?php echo $id_preco_item; ?>"></div>
                 </div>
             </div>
-            <div class="row" id="div_preco<?php echo $id_preco_item; ?>">
+            <div class="row align-items-center" id="div_preco<?php echo $id_preco_item; ?>">
                 <div class="col mb-3 text-center">
                     <div class="input-group">
                         <span class="input-group-text">R$</span>
@@ -124,7 +124,7 @@ $id_usuario = $_SESSION['id_usuario'];
                             <input type="text" class="form-control" id="txt_preco_item<?php echo $id_preco_item; ?>" onkeyup="formatarReal(this)" maxlength="10" value="<?php echo number_format($preco_item, 2, ',', '.'); ?>" />
                             <label for="txt_preco_item<?php echo $id_preco_item; ?>">Preço do Item (em Reais max. XXX.XXX,XX)</label>
                         </div>
-                        <a class="input-group-text" href="#" data-preco="<?php echo $id_preco_item; ?>" data-item="<?php echo $id_item_preco_item; ?>" onclick="editarPreco(this)" title="Editar Preço"><i class="fa fa-eraser text-warning"></i></a>
+                        <a class="input-group-text" href="#stay" data-preco="<?php echo $id_preco_item; ?>" data-item="<?php echo $id_item_preco_item; ?>" onclick="editarPreco(this)" title="Editar Preço"><i class="fa fa-eraser text-warning"></i></a>
                     </div>
                     <div class="container collapse" id="div_sucesso_editar_preco<?php echo $id_preco_item; ?>"></div>
                 </div>

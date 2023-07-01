@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_novo_fornecedor">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-users text-warning"></i>
@@ -31,7 +31,7 @@ $id_usuario = $_SESSION['id_usuario'];
                 </div>
             </div>
             <form action="adicionar_fornecedor.php" method="post" id="frm_novo_fornecedor" name="frm_novo_fornecedor">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col mb-3 text-center">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="txt_nome_fornecedor" id="txt_nome_fornecedor" placeholder="Digite aqui o nome do Fornecedor" />

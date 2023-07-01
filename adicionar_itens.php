@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_adicionar_itens">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-shopping-cart text-warning"></i>
@@ -31,7 +31,7 @@ $id_usuario = $_SESSION['id_usuario'];
                 </div>
             </div>
             <?php if (!isset($_GET['id_orcamento']))  { ?>
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-ban text-danger"></i>
@@ -40,7 +40,7 @@ $id_usuario = $_SESSION['id_usuario'];
                 </div>
             </div>
             <?php } else { ?>
-            <div class="row">
+            <div class="row align-items-center">
                 <?php
                     $id_orcamento_get = $_GET['id_orcamento'];
                     $str_sql_itens = "select * from `tbl_itens`;";

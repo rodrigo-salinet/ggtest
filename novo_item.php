@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_novo_item">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-shopping-cart text-warning"></i>
@@ -31,7 +31,7 @@ $id_usuario = $_SESSION['id_usuario'];
                 </div>
             </div>
             <form action="adicionar_item.php" method="post" id="frm_novo_item" name="frm_novo_item" enctype="multipart/form-data">
-                <div class="row mb-3">
+                <div class="row align-items-center mb-3">
                     <div class="col text-center">
                         <div class="form-floating">
                             <input type="file" class="form-control" name="fil_upload_imagem" id="fil_upload_imagem" />
@@ -39,7 +39,7 @@ $id_usuario = $_SESSION['id_usuario'];
                         </div>
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row align-items-center mb-3">
                     <div class="col text-center">
                         <div class="form-floating">
                             <input type="text" class="form-control" name="txt_nome_item" id="txt_nome_item" />
@@ -47,7 +47,7 @@ $id_usuario = $_SESSION['id_usuario'];
                         </div>
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row align-items-center mb-3">
                     <div class="col text-center">
                         <div class="form-floating">
                             <input type="text" class="form-control" name="txt_descricao_item" id="txt_descricao_item" />
@@ -55,7 +55,7 @@ $id_usuario = $_SESSION['id_usuario'];
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col text-center">
                         <input type="submit" class="btn btn-outline-success" value="Criar item">
                     </div>
