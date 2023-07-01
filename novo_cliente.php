@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_novo_cliente">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-users text-warning"></i>
@@ -31,11 +31,18 @@ $id_usuario = $_SESSION['id_usuario'];
                 </div>
             </div>
             <form action="adicionar_cliente.php" method="post" id="frm_novo_cliente" name="frm_novo_cliente">
-                <div class="row">
-                    <div class="col mb-3 text-center">
+                <div class="row align-items-center">
+                    <div class="col mb-3">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="txt_nome_cliente" id="txt_nome_cliente" placeholder="Digite aqui o nome do cliente" />
+                            <div class="form-floating">
+                                <input type="text" class="form-control" name="txt_nome_cliente" id="txt_nome_cliente" placeholder="Digite aqui o nome do cliente" />
+                                <label for="txt_nome_cliente">Digite aqui o nome do cliente</label>
+                            </div>
                             <input type="submit" class="btn btn-outline-success" value="Criar Cliente">
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" name="chk_redirect" id="chk_redirect" checked />
+                            <label class="form-check-label" for="chk_redirect">Depois disso criar orçamento</label>
                         </div>
                     </div>
                 </div>
