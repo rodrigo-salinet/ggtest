@@ -15,7 +15,7 @@ require_once('conexao.php');
     <h3 class="text-danger"><?php echo @$_GET['msg']; ?></h3>
     <form id="frm_cadastro" action="criar_usuario.php" method="post">
         <?php
-            $str_sql_tipos_usuarios = "SELECT * FROM `tbl_tipos_usuarios`;";
+            $str_sql_tipos_usuarios = "select * from `tbl_tipos_usuarios`;";
             try {
                 $sql_tipos_usuarios = mysqli_query($conexao, $str_sql_tipos_usuarios);
                 for ($i = 0; $i < mysqli_num_rows($sql_tipos_usuarios); $i++) {
