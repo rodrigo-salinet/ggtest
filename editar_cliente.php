@@ -22,20 +22,12 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_editar_cliente">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-users text-warning"></i>
                         Editar/Excluir Cliente
                     </h5>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col text-center">
-                    ID Cliente
-                </div>
-                <div class="col text-center">
-                    Nome
                 </div>
             </div>
             <?php
@@ -48,22 +40,26 @@ $id_usuario = $_SESSION['id_usuario'];
                     $id_cliente = $clientes['id'];
                     $nome_cliente = $clientes['nome'];
             ?>
-            <div class="row mb-3" id="div_row_cliente<?php echo $id_cliente; ?>">
+            <div class="row align-items-center mb-3" id="div_row_cliente<?php echo $id_cliente; ?>">
                 <div class="col text-center">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="txt_editar_id_cliente<?php echo $id_cliente; ?>" value="<?php echo $id_cliente; ?>" disabled />
-                        <a href="#" onclick="excluirCliente(this)" class="input-group-text" data-cliente="<?php echo $id_cliente; ?>"><i class="text-danger fa fa-trash" title="Excluir Cliente"></i></a>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="txt_editar_id_cliente<?php echo $id_cliente; ?>" value="<?php echo $id_cliente; ?>" disabled />
+                            <label for="txt_editar_id_cliente<?php echo $id_cliente; ?>">ID</label>
+                        </div>
+                        <a href="#stay" onclick="excluirCliente(this)" class="input-group-text" data-cliente="<?php echo $id_cliente; ?>"><i class="text-danger fa fa-trash" title="Excluir Cliente"></i></a>
                     </div>
                     <div class="container collapse" id="div_sucesso_editar_cliente_id_cliente<?php echo $id_item; ?>"></div>
                 </div>
                 <div class="col text-center">
                     <div class="input-group">
-                        <input class="form-control" id="txt_editar_nome_cliente<?php echo $id_cliente; ?>" data-cliente="<?php echo $id_cliente; ?>" value="<?php echo $nome_cliente; ?>" />
-                        <a href="#" onclick="editarNomeCliente(this)" class="input-group-text" data-cliente="<?php echo $id_cliente; ?>"><i class="text-warning fa fa-eraser" title="Alterar Nome do Cliente"></i></a>
+                        <div class="form-floating">
+                            <input class="form-control" id="txt_editar_nome_cliente<?php echo $id_cliente; ?>" data-cliente="<?php echo $id_cliente; ?>" value="<?php echo $nome_cliente; ?>" />
+                            <label for="txt_editar_nome_cliente<?php echo $id_cliente; ?>">Nome</label>
+                        </div>
+                        <a href="#stay" onclick="editarNomeCliente(this)" class="input-group-text" data-cliente="<?php echo $id_cliente; ?>"><i class="text-warning fa fa-eraser" title="Alterar Nome do Cliente"></i></a>
                     </div>
-                    <div class="container collapse" id="div_sucesso_editar_cliente_nome_cliente<?php echo $id_cliente; ?>">
-                        .
-                    </div>
+                    <div class="container collapse" id="div_sucesso_editar_cliente_nome_cliente<?php echo $id_cliente; ?>"></div>
                 </div>
             </div>
             <?php } ?>
