@@ -101,8 +101,7 @@ $(document).ready(function() {
         e.preventDefault();
         let hdn_editar_orcamento_excluir_item_id_orcamento = document.getElementById('hdn_editar_orcamento_excluir_item_id_orcamento');
         let hdn_editar_orcamento_excluir_item_id_item = document.getElementById('hdn_editar_orcamento_excluir_item_id_item');
-        let ig_editar_orcamento_nome_item = document.getElementById('ig_editar_orcamento' + hdn_editar_orcamento_excluir_item_id_orcamento.value + '_nome_item' + hdn_editar_orcamento_excluir_item_id_item.value);
-        let ig_editar_orcamento_quantidade_item = document.getElementById('ig_editar_orcamento' + hdn_editar_orcamento_excluir_item_id_orcamento.value + '_quantidade_item' + hdn_editar_orcamento_excluir_item_id_item.value);
+        let div_row_id_orcamento_id_item = document.getElementById('div_row_id_orcamento' + hdn_editar_orcamento_excluir_item_id_orcamento.value + '_id_item' + hdn_editar_orcamento_excluir_item_id_item.value);
         let div_sucesso_editar_orcamento_id_item = document.getElementById('div_sucesso_editar_orcamento' + hdn_editar_orcamento_excluir_item_id_orcamento.value + '_id_item' + hdn_editar_orcamento_excluir_item_id_item.value);
         let div_sucesso_editar_orcamento_quantidade_item = document.getElementById('div_sucesso_editar_orcamento' + hdn_editar_orcamento_excluir_item_id_orcamento.value + '_quantidade_item' + hdn_editar_orcamento_excluir_item_id_item.value);
         $.ajax({
@@ -112,16 +111,13 @@ $(document).ready(function() {
             success: function(response) {
                 let jsonData = JSON.parse(response);
                 if (jsonData.success == "1") {
-                    div_sucesso_editar_orcamento_id_item.innerHTML = jsonData.message;
-                    div_sucesso_editar_orcamento_quantidade_item.innerHTML = jsonData.message;
+                    div_row_id_orcamento_id_item.innerHTML = '<div class="col text-center">' + jsonData.message + '</div>';
                 } else {
                     div_sucesso_editar_orcamento_id_item.innerHTML = jsonData.error;
                     div_sucesso_editar_orcamento_quantidade_item.innerHTML = jsonData.error;
-                }
-                ig_editar_orcamento_nome_item.innerHTML = '';
-                ig_editar_orcamento_quantidade_item.innerHTML = '';
-                div_sucesso_editar_orcamento_id_item.classList.add("show");
-                div_sucesso_editar_orcamento_quantidade_item.classList.add("show");
+                    div_sucesso_editar_orcamento_id_item.classList.add("show");
+                    div_sucesso_editar_orcamento_quantidade_item.classList.add("show");
+                    }
             }
         });
     });
