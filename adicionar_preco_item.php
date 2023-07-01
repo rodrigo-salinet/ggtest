@@ -18,8 +18,10 @@ if (!isset($_SESSION['logado'])) {
 
     try {
         $str_sql_adicionar_preco_item = "insert into `tbl_precos_itens` (`id_item`,`id_fornecedor`,`preco`) values ($sel_id_item, $sel_id_fornecedor, $preco_item);";
-        $sql_adicionar_preco_item = mysqli_query($conexao, $str_sql_adicionar_preco_item);
-        $msg = 'Preço de Item adicionado com sucesso!';
+        if ($conexao->query($str_sql_adicionar_preco_item) === TRUE) {
+            $last_id = $conexao->insert_id;
+            $msg = "Preço R$ $txt_preco_item de Item [ID $last_id] adicionado com sucesso!";
+        }
     } catch (\Exception $e) {
         $msg = "Não foi possível adicionar o Preço de Item";
     }
