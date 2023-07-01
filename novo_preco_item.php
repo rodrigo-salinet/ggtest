@@ -22,7 +22,7 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_novo_preco_item">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-3 text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-shopping-cart text-warning"></i>
@@ -31,7 +31,7 @@ $id_usuario = $_SESSION['id_usuario'];
                 </div>
             </div>
             <form action="adicionar_preco_item.php" method="post" id="frm_novo_preco_item" name="frm_novo_preco_item">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col mb-3 text-center">
                         <div class="form-floating">
                             <select class="form-select" name="sel_id_item" id="sel_id_item">
@@ -53,7 +53,7 @@ $id_usuario = $_SESSION['id_usuario'];
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col mb-3 text-center">
                         <div class="form-floating">
                             <select class="form-select" name="sel_id_fornecedor" id="sel_id_fornecedor">
@@ -75,7 +75,7 @@ $id_usuario = $_SESSION['id_usuario'];
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col mb-3 text-center">
                         <div class="input-group">
                             <span class="input-group-text">R$</span>
@@ -86,7 +86,7 @@ $id_usuario = $_SESSION['id_usuario'];
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col mb-3 text-center">
                         <input type="submit" class="btn btn-outline-success" value="Criar Preço de Item">
                     </div>
