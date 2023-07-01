@@ -101,6 +101,7 @@ $id_usuario = $_SESSION['id_usuario'];
                     $sql_itens_orcamentos = mysqli_query($conexao, $str_sql_itens_orcamentos);
                     $qtd_itens_orcamentos = mysqli_num_rows($sql_itens_orcamentos);
 
+                    $subtotal = [];
                     for ($c = 0; $c < $qtd_itens_orcamentos; $c++) {
                         $itens_orcamentos = mysqli_fetch_array($sql_itens_orcamentos);
                         $id_item_orcamento = $itens_orcamentos['id_item'];
@@ -152,6 +153,7 @@ $id_usuario = $_SESSION['id_usuario'];
                                 $precos_item = mysqli_fetch_array($sql_precos_item);
                                 $preco_item = 'R$ ' . number_format($precos_item['preco'], 2, ',', '.');
                                 $preco_numeral = $precos_item['preco'];
+                                array_push($subtotal, $precos_item['preco']); 
                             }
 
                             $str_sql_melhor_preco = "select * from `tbl_precos_itens` where `preco` < $preco_numeral and `id_item` = $id_item_orcamento;";
@@ -181,6 +183,19 @@ $id_usuario = $_SESSION['id_usuario'];
             <?php
                     }
                     mysqli_free_result($sql_itens_orcamentos);
+
+                    if (count($subtotal) > 0) {
+            ?>
+            <div class="row align-items-center mb-3" id="div_row_subtotal<?php echo $id_orcamento; ?>">
+                <div class="col text-center">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="subtotal<?php echo $id_orcamento; ?>" value="R$ <?php echo number_format(array_sum($subtotal), 2, ',', '.'); ?>" disabled />
+                        <label for="subtotal<?php echo $id_orcamento; ?>">Subtotal</label>
+                    </div>
+                </div>
+            </div>
+            <?php
+                    }
             ?>
             <div class="row align-items-center mb-3" id="div_row_status<?php echo $id_orcamento; ?>">
                 <div class="col text-center">
