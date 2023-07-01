@@ -49,32 +49,72 @@ function alterarImagemItem(obj) {
 }
 
 function alterarNomeItem(obj) {
-    let id_orcamento = obj.dataset.orcamento;
-    let id_cliente = obj.value;
+    let id_item = obj.dataset.item;
 
-    let hdn_editar_orcamento_editar_cliente_id_orcamento = document.getElementById('hdn_editar_orcamento_editar_cliente_id_orcamento');
-    let hdn_editar_orcamento_editar_cliente_id_cliente = document.getElementById('hdn_editar_orcamento_editar_cliente_id_cliente');
+    let hdn_editar_item_nome_id_item = document.getElementById('hdn_editar_item_nome_id_item');
+    let hdn_editar_item_nome = document.getElementById('hdn_editar_item_nome');
+    let txt_nome_item = document.getElementById('txt_nome_item' + id_item);
 
-    hdn_editar_orcamento_editar_cliente_id_orcamento.value = id_orcamento;
-    hdn_editar_orcamento_editar_cliente_id_cliente.value = id_cliente;
+    hdn_editar_item_nome_id_item.value = id_item;
+    hdn_editar_item_nome.value = txt_nome_item.value;
 
-    $('#frm_editar_orcamento_id_cliente').trigger("submit");
+    $('#frm_editar_item_nome').trigger("submit");
 }
 
 function alterarDescricaoItem(obj) {
-    let id_orcamento = obj.dataset.orcamento;
-    let id_cliente = obj.value;
+    let id_item = obj.dataset.item;
 
-    let hdn_editar_orcamento_editar_cliente_id_orcamento = document.getElementById('hdn_editar_orcamento_editar_cliente_id_orcamento');
-    let hdn_editar_orcamento_editar_cliente_id_cliente = document.getElementById('hdn_editar_orcamento_editar_cliente_id_cliente');
+    let hdn_editar_item_descricao_id_item = document.getElementById('hdn_editar_item_descricao_id_item');
+    let hdn_editar_item_descricao = document.getElementById('hdn_editar_item_descricao');
+    let txt_descricao_item = document.getElementById('txt_descricao_item' + id_item);
 
-    hdn_editar_orcamento_editar_cliente_id_orcamento.value = id_orcamento;
-    hdn_editar_orcamento_editar_cliente_id_cliente.value = id_cliente;
+    hdn_editar_item_descricao_id_item.value = id_item;
+    hdn_editar_item_descricao.value = txt_descricao_item.value;
 
-    $('#frm_editar_orcamento_id_cliente').trigger("submit");
+    $('#frm_editar_item_descricao').trigger("submit");
 }
 
 $(document).ready(function() {
+
+    $('#frm_editar_item_descricao').submit(function(e) {
+        e.preventDefault();
+        let hdn_editar_item_descricao_id_item = document.getElementById('hdn_editar_item_descricao_id_item');
+        let div_sucesso_editar_item_descricao = document.getElementById('div_sucesso_editar_item_descricao' + hdn_editar_item_descricao_id_item.value);
+        $.ajax({
+            type: "POST",
+            url: 'editar_item_descricao.php',
+            data: $(this).serialize(),
+            success: function(response) {
+                let jsonData = JSON.parse(response);
+                if (jsonData.success == "1") {
+                    div_sucesso_editar_item_descricao.innerHTML = jsonData.message;
+                } else {
+                    div_sucesso_editar_item_descricao.innerHTML = jsonData.error;
+                }
+                div_sucesso_editar_item_descricao.classList.add("show");
+            }
+        });
+    });
+
+    $('#frm_editar_item_nome').submit(function(e) {
+        e.preventDefault();
+        let hdn_editar_item_nome_id_item = document.getElementById('hdn_editar_item_nome_id_item');
+        let div_sucesso_editar_item_nome = document.getElementById('div_sucesso_editar_item_nome' + hdn_editar_item_nome_id_item.value);
+        $.ajax({
+            type: "POST",
+            url: 'editar_item_nome.php',
+            data: $(this).serialize(),
+            success: function(response) {
+                let jsonData = JSON.parse(response);
+                if (jsonData.success == "1") {
+                    div_sucesso_editar_item_nome.innerHTML = jsonData.message;
+                } else {
+                    div_sucesso_editar_item_nome.innerHTML = jsonData.error;
+                }
+                div_sucesso_editar_item_nome.classList.add("show");
+            }
+        });
+    });
 
     $('#frm_editar_item_excluir_imagem').submit(function(e) {
         e.preventDefault();
