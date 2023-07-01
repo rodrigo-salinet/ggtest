@@ -26,8 +26,10 @@ unset($_SESSION['rdg_tipos_usuarios']);
 
 try {
     $str_sql_criar_usuario = "insert into `tbl_usuarios` (`nome`, `login`, `senha`, `id_tipo`) values ('$nome', '$login', md5('$senha'), $rdg_tipos_usuarios);";
-    $sql_criar_usuario = mysqli_query($conexao, $str_sql_criar_usuario);
-    return header('Location: login.php?msg=' . htmlspecialchars("Usuário cadastrado com sucesso! Favor realizar o login."));
+    if ($conexao->query($str_sql_criar_usuario) === TRUE) {
+        $last_id = $conexao->insert_id;
+        return header('Location: login.php?msg=' . htmlspecialchars("Usuário cadastrado com sucesso! Favor realizar o login."));
+    }
 } catch (\Exception $e) {
     die("
         Ops! Pelo motivo abaixo não foi possível criar o usuário $login
