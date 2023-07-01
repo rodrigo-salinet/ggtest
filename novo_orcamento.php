@@ -22,8 +22,8 @@ $id_usuario = $_SESSION['id_usuario'];
 
     <section class="content" id="sec_novo_orcamento">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col mb-3 text-center">
+            <div class="row align-items-center mb-3">
+                <div class="col text-center">
                     <h5 class="h5 text-center">
                         <i class="fa fa-money text-warning"></i>
                         Novo Orçamento
@@ -31,27 +31,42 @@ $id_usuario = $_SESSION['id_usuario'];
                 </div>
             </div>
             <form action="adicionar_orcamento.php" method="post" id="frm_novo_orcamento" name="frm_novo_orcamento">
-                <div class="row">
-                    <div class="col mb-3 text-center">
+                <div class="row align-items-center mb-3">
+                    <div class="col">
                         <div class="input-group mb-3">
-                            <select class="form-select" name="sel_clientes" id="sel_clientes">
-                                <option value="0" selected>Selecione um cliente</option>
-                                <?php
-                                    $str_sql_clientes = "select * from `tbl_clientes`;";
-                                    $sql_clientes = mysqli_query($conexao, $str_sql_clientes);
-                                    $qtd_clientes = mysqli_num_rows($sql_clientes);
+                            <div class="form-floating">
+                                <select class="form-select" name="sel_clientes" id="sel_clientes">
+                                    <option value="0" selected disabled></option>
+                                    <?php
+                                        $str_sql_clientes = "select * from `tbl_clientes`;";
+                                        $sql_clientes = mysqli_query($conexao, $str_sql_clientes);
+                                        $qtd_clientes = mysqli_num_rows($sql_clientes);
 
-                                    for ($c = 0; $c < $qtd_clientes; $c++) {
-                                        $clientes = mysqli_fetch_array($sql_clientes);
-                                        $id_cliente = $clientes['id'];
-                                        $nome_cliente = $clientes['nome'];
-                                ?>
-                                <option value="<?php echo $id_cliente; ?>"><?php echo $nome_cliente; ?></option>
-                                <?php
-                                    }
-                                ?>
-                            </select>
+                                        for ($c = 0; $c < $qtd_clientes; $c++) {
+                                            $clientes = mysqli_fetch_array($sql_clientes);
+                                            $id_cliente = $clientes['id'];
+                                            $nome_cliente = $clientes['nome'];
+
+                                            $selecionado = '';
+                                            if (isset($_GET['id_cliente'])) {
+                                                $id_cliente_get = $_GET['id_cliente'];
+                                                if ($id_cliente_get == $id_cliente) {
+                                                    $selecionado = 'selected';
+                                                }
+                                            }
+                                    ?>
+                                    <option value="<?php echo $id_cliente; ?>" <?php echo $selecionado; ?>><?php echo $nome_cliente; ?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                </select>
+                                <label for="sel_clientes">Selecione um cliente</label>
+                            </div>
                             <input type="submit" class="btn btn-outline-success" value="Criar Orçamento">
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" name="chk_redirect" id="chk_redirect" checked />
+                            <label class="form-check-label" for="chk_redirect">Depois disso cadastrar itens</label>
                         </div>
                     </div>
                 </div>
