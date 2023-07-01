@@ -48,8 +48,10 @@ if (!isset($_SESSION['logado'])) {
         }
 
         $str_sql_adicionar_item = "insert into `tbl_itens` (`imagem`,`nome`,`descricao`) values ('$nome_arquivo_destino', '$txt_nome_item', '$txt_descricao_item');";
-        $sql_adicionar_item = mysqli_query($conexao, $str_sql_adicionar_item);
-        $msg = 'Item adicionado com sucesso!';
+        if ($conexao->query($str_sql_adicionar_item) === TRUE) {
+            $last_id = $conexao->insert_id;
+            $msg = "Item $txt_nome_item [ID $last_id] adicionado com sucesso!";
+        }
     } catch (\Exception $e) {
         $msg = "Ocorreu o erro: ." . str_replace(array("\r", "\n"), '', $e);
     }
