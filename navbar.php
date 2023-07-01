@@ -7,7 +7,7 @@
             <div class="navbar-collapse collapse" id="navbarNav">
                 <ul class="nav-underline navbar-nav me-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#stay" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Itens
                         </a>
                         <ul class="dropdown-menu">
@@ -28,7 +28,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#stay" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Clientes
                         </a>
                         <ul class="dropdown-menu">
@@ -37,7 +37,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#stay" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Orçamentos
                         </a>
                         <ul class="dropdown-menu">
@@ -46,6 +46,7 @@
                             <li><a class="dropdown-item" href="editar_orcamento.php">Editar/Excluir Orçamento</a></li>
                             <?php } else { ?>
                             <li><a class="dropdown-item" href="aprovar_orcamentos.php">Aprovar Orçamentos</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="novo_status_orcamento.php">Novo Status de Orçamento</a></li>
                             <li><a class="dropdown-item" href="editar_status_orcamento.php">Editar/Excluir Status de Orçamento</a></li>
                             <?php } ?>
@@ -54,7 +55,7 @@
                 </ul>
                 <ul class="nav navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#stay" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-gear"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -77,7 +78,7 @@
             </div>
             <?php
                 $arquivo_atual = explode('?', $_SERVER['REQUEST_URI'])[0];
-                if ($arquivo_atual == '/adicionar_itens.php') {
+                if (basename($arquivo_atual) == 'adicionar_itens.php') {
             ?>
             <div class="d-flex" role="search">
                 <select id="sel_orcamentos" class="form-select" onchange="selecionarOrcamento(this)">
@@ -93,6 +94,9 @@
                             $str_sql_cliente = "select * from tbl_clientes where id = $id_cliente;";
                             $sql_cliente = mysqli_query($conexao, $str_sql_cliente);
                             $qtd_cliente = mysqli_num_rows($sql_cliente);
+                            if ($qtd_cliente <= 0) {
+                                continue;
+                            }
                             for ($c = 0; $c < $qtd_cliente; $c++) {
                                 $cliente = mysqli_fetch_array($sql_cliente);
                                 $nome_cliente = $cliente['nome'];
@@ -118,7 +122,7 @@
 
             <?php
                 $arquivo_atual = explode('?', $_SERVER['REQUEST_URI'])[0];
-                if ($arquivo_atual == '/aprovar_orcamentos.php') {
+                if (basename($arquivo_atual) == 'aprovar_orcamentos.php') {
             ?>
             <div class="d-flex" role="search">
                 <select id="sel_usuarios" class="form-select" onchange="selecionarUsuario(this)">
@@ -154,7 +158,7 @@
 
     <header class="content mb-4 mt-4">
         <div class="container collapse show" id="sec_header">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-md-4">
                     &nbsp;
                 </div>
@@ -165,7 +169,7 @@
     <?php if (isset($_GET['msg'])) { ?>
     <section class="content" id="sec_msg">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col mb-4">
                     <h5 class="h5 text-center"><i class="fa fa-bullhorn text-danger"></i> <<< <i><?php echo $_GET['msg']; ?></i></h5>
                 </div>
