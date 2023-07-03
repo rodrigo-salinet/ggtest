@@ -66,6 +66,7 @@ $(document).ready(function() {
                 let jsonData = JSON.parse(response);
                 if (jsonData.success == "1") {
                     div_sucesso_aprovar_orcamento_id_item.innerHTML = jsonData.message;
+                    $("#sel_aprovar_orcamento_status" + hdn_aprovar_orcamentos_preco_item_id_orcamento.value).val("7").trigger("change");
                 } else {
                     div_sucesso_aprovar_orcamento_id_item.innerHTML = jsonData.error;
                 }
