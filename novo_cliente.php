@@ -42,7 +42,7 @@ $id_usuario = $_SESSION['id_usuario'];
                         </div>
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" name="chk_redirect" id="chk_redirect" checked />
-                            <label class="form-check-label" for="chk_redirect">Depois disso criar orçamento</label>
+                            <label class="form-check-label" for="chk_redirect">Depois disso criar novo orçamento</label>
                         </div>
                     </div>
                 </div>
