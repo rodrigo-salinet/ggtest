@@ -35,7 +35,7 @@ if (!isset($_SESSION['logado'])) {
             $str_sql_adicionar_item_orcamento = "insert into `tbl_itens_orcamentos` (`id_orcamento`,`id_item`,`quantidade`) values ($hdn_atualizar_quantidade_id_orcamento, $hdn_atualizar_quantidade_id_item, $hdn_atualizar_quantidade_txt_quantidade);";
             if ($conexao->query($str_sql_adicionar_item_orcamento) === TRUE) {
                 $last_id = $conexao->insert_id;
-                $data['message'] = '<i class="fa fa-check-circle-o text-success"></i> Item [ID ' . hdn_atualizar_quantidade_id_item . '] adicionado com sucesso [ Novo ID vinculado ' . $last_id . ']!';
+                $data['message'] = '<i class="fa fa-check-circle-o text-success"></i> Item [ID ' . $hdn_atualizar_quantidade_id_item . '] adicionado com sucesso [Novo ID vinculado ' . $last_id . ']!';
             }
         }
     } catch (\Exception $e) {
