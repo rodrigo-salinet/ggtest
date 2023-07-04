@@ -46,6 +46,21 @@ $id_usuario = $_SESSION['id_usuario'];
                                         $id_item = $itens['id'];
                                         $nome_item = $itens['nome'];
 
+                                        $str_sql_preco_item = "select * from `tbl_precos_itens` where `id_item` = $id_item;";
+                                        $sql_preco_item = $conexao->query($str_sql_preco_item);
+                                        $qtd_sql_preco_item = $sql_preco_item->num_rows;
+
+                                        $bg_sel_id_item_option = 'light';
+                                        if ($qtd_sql_preco_item == 0) {
+                                            $bg_sel_id_item_option = 'danger';
+                                        } else if ($qtd_sql_preco_item > 0 && $qtd_sql_preco_item < 3) {
+                                            $bg_sel_id_item_option = 'warning';
+                                        } else if ($qtd_sql_preco_item >= 3) {
+                                            $bg_sel_id_item_option = 'success';
+                                        }
+
+                                        mysqli_free_result($sql_preco_item);
+
                                         $selecionado = '';
                                         if (isset($_GET['id_item'])) {
                                             $id_item_get = $_GET['id_item'];
@@ -54,7 +69,7 @@ $id_usuario = $_SESSION['id_usuario'];
                                             }
                                         }
                                     ?>
-                                <option value="<?php echo $id_item; ?>" <?php echo $selecionado; ?>><?php echo $nome_item; ?></option>
+                                <option class="bg-<?php echo $bg_sel_id_item_option; ?>" value="<?php echo $id_item; ?>" <?php echo $selecionado; ?>><?php echo $nome_item; ?></option>
                                 <?php } ?>
                             </select>
                             <label for="sel_id_item">Itens</label>
