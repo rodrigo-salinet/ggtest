@@ -45,8 +45,16 @@ $id_usuario = $_SESSION['id_usuario'];
                                         $itens = mysqli_fetch_array($sql_itens);
                                         $id_item = $itens['id'];
                                         $nome_item = $itens['nome'];
-                                ?>
-                                <option value="<?php echo $id_item; ?>"><?php echo $nome_item; ?></option>
+
+                                        $selecionado = '';
+                                        if (isset($_GET['id_item'])) {
+                                            $id_item_get = $_GET['id_item'];
+                                            if ($id_item_get == $id_item) {
+                                                $selecionado = "selected";
+                                            }
+                                        }
+                                    ?>
+                                <option value="<?php echo $id_item; ?>" <?php echo $selecionado; ?>><?php echo $nome_item; ?></option>
                                 <?php } ?>
                             </select>
                             <label for="sel_id_item">Itens</label>
