@@ -51,6 +51,13 @@ if (!isset($_SESSION['logado'])) {
         if ($conexao->query($str_sql_adicionar_item) === TRUE) {
             $last_id = $conexao->insert_id;
             $msg = "Item $txt_nome_item [ID $last_id] adicionado com sucesso!";
+
+            if (isset($_POST['chk_redirect'])) {
+                $chk_redirect = $_POST['chk_redirect'];
+                if ($chk_redirect == 'on') {
+                    $redirect = 'novo_cliente.php';
+                }
+            }
         }
     } catch (\Exception $e) {
         $msg = "Ocorreu o erro: ." . str_replace(array("\r", "\n"), '', $e);
