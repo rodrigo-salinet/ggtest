@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('conexao.php');
+// teste
 
 if (!@$_SESSION['logado']) {
     header('Location: login.php?msg=' . htmlspecialchars("Para entrar no sistema é necessário estar cadastrado e logado."));
